@@ -14,12 +14,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# readventure/urls.py
-
+import bookswap
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from bookswap import sign_in
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('bookswap/', include('bookswap.urls')),
+    path('sign-in/', sign_in, name='sign_in'),
+    # Add other URL patterns as needed
 ]
