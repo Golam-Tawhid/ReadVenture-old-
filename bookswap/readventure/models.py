@@ -1,9 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, User
-
-# class User(models.Model):
-#     username = models.CharField(max_length=255)
-#     password = models.CharField(max_length=255)
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None, **extra_fields):
         # if not email:
