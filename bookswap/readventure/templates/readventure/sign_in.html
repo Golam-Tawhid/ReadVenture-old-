@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat&family=Sacramento&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <!-- <script nonce="your-nonce">(function(w,d){ /* Your script content here */ })(window,document);</script> -->
+
 </head>
 <body class="img js-fullheight" style="background-image: url('/static/images/img10.jpg');">
     <section class="ftco-section">
@@ -26,10 +26,10 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="login-wrap p-0">
                         <h3 class="mb-4 text-center">Have an account?</h3>
-                        <form action="{% url 'index' %}" class="signin-form" method="post">
+
+                        <form action="{% url 'sign_in' %}" class="signin-form" method="post">
                             {% csrf_token %}
                                 <!-- Form contents -->
-                            
                             <div class="form-group">
                                 <input type="text" name="username" class="form-control" placeholder="Username" required>
                             </div>
@@ -52,6 +52,7 @@
                                 </div>
                             </div>
                         </form>
+                        
                         <div class="social d-flex text-center">
                             <a href="signup.html" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-google mr-2"></span>Sign Up</a>
                         </div>
@@ -60,11 +61,5 @@
             </div>
         </div>
     </section>
-
-    <!-- <script src="js/jquery.min.js"></script>
-    <script src="js/popper.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" data-cf-beacon='{"rayId":"828198021c2f8856","version":"2023.10.0","token":"cd0b4b3a733644fc843ef0b185f98241"}' crossorigin="anonymous"></script> -->
 </body>
 </html>

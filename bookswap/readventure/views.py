@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
-def index(request):
+def sign_in(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -17,7 +17,7 @@ def index(request):
         #     # Handle invalid login credentials
         #     return render(request, 'readventure/index.html', {'error_message': 'Invalid login credentials'})
 
-    return render(request, 'readventure/index.html')
+    return render(request, 'readventure/sign_in.html')
 
 def home(request):
     if request.session.get('login_success'):
@@ -25,4 +25,4 @@ def home(request):
         return render(request, 'readventure/home.html')
     else:
         # Redirect to the login page if there's no successful login session
-        return redirect('index')  # Update 'user_login' with the actual name of your login view
+        return redirect('sign_in')  # Update 'user_login' with the actual name of your login view
