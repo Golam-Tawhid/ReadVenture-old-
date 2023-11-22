@@ -17,7 +17,7 @@ def index(request):
             return redirect('congratulations')  # Redirect to the congratulations page
         else:
             # Handle invalid login credentials
-            return render(request, 'index.html', {'error_message': 'Invalid login credentials'})
+            return render(request, 'readventure/index.html', {'error_message': 'Invalid login credentials'})
 
     return render(request, 'readventure/index.html')
 
