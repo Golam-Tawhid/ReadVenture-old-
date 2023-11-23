@@ -1,10 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None, **extra_fields):
-        # if not email:
-        #     raise ValueError('The Email field must be set')
-        # email = self.normalize_email(email)
         user = self.model(username=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -17,7 +15,13 @@ class UserManager(BaseUserManager):
         return self.create_user(username, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
-    # email = models.EmailField(unique=True)
+    # Add the additional fields
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    student_id = models.CharField(max_length=20, unique=True)
+    email = models.EmailField(unique=True)
+    contact_no = models.CharField(max_length=15)
+    
     username = models.CharField(max_length=30, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -25,7 +29,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['password']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'student_id', 'email', 'contact_no']
 
     def __str__(self):
         return self.username
