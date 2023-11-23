@@ -16,13 +16,13 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     # Add the additional fields
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    student_id = models.CharField(max_length=20, unique=True)
+    first_name = models.CharField(max_length=30, default='N/A')
+    last_name = models.CharField(max_length=30, default='N/A')
+    student_id = models.CharField(max_length=20, unique=True, default='N/A')
     email = models.EmailField(unique=True)
-    contact_no = models.CharField(max_length=15)
+    contact_no = models.CharField(max_length=15, default='N/A')
     
-    username = models.CharField(max_length=30, unique=True)
+    username = models.CharField(max_length=30, unique=True, default='N/A')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
