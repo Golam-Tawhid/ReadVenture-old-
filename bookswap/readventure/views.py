@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 
 def sign_in(request):
@@ -15,6 +16,8 @@ def sign_in(request):
         else:
             # Handle invalid login credentials
             return render(request, 'readventure/sign_in.html', {'error_message': 'Invalid login credentials'})
+        
+    return render(request, 'readventure/sign_in.html')
 
 def home(request):
     if request.session.get('login_success'):
