@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -6,19 +7,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
 		<!-- MATERIAL DESIGN ICONIC FONT -->
-		<link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+		<link rel="stylesheet" href="{% static 'fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+
+		<link rel="icon" href="{% static 'images/favicon.ico' %}">
 
 		<!-- STYLE CSS -->
-		<link rel="stylesheet" href="signup.css">
+		<link rel="stylesheet" href="{% static 'css/signup.css' %}">
 		
 	</head>
 
 	<body>
 
-		<div class="wrapper" style="background-image: url('images/peakpx.jpg');">
+		<div class="wrapper" style="background-image: url('/static/images/peakpx.jpg');">
 			<div class="inner">
 				<div class="image-holder">
-				  <img src="images/img1.jpg" alt="">
+				  <img src="{% static 'images/img1.jpg' %}" alt="">
 				</div>
 				<form action="">
 					<h3>Tell Us About Yourself!</h3>
