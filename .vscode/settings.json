@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/18e58f9c-0d15-4bcb-a56b-96b6d2409649/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/readventure",
+    "appService.deploySubpath": "bookswap"
+}
