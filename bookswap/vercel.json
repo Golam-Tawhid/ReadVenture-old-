@@ -1,32 +1,30 @@
 {
+  "version": 2,
   "builds": [
+    {
+      "src": "bookswap/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9"
+      }
+    },
     {
       "src": "build_files.sh",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "staticfiles_build"
-      }
-    },
-    {
-      "src": "/bookswap/wsgi.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "15mb",
-        "env": {
-          "MYSQLCLIENT_CFLAGS": "-I/path/to/mysql/include",
-          "MYSQLCLIENT_LDFLAGS": "-L/path/to/mysql/lib -lmysqlclient"
-        }
+        "distDir": "staticfiles"
       }
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "bookswap/wsgi.py"
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
     },
     {
-      "src": "/static/(.*)",
-      "dest": "/staticfiles_build/$1"
+      "src": "/(.*)",
+      "dest": "bookswap/wsgi.py"
     }
   ]
 }
