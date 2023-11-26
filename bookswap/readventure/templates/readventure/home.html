@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -15,35 +16,38 @@
         <title>HOME</title>
 
         <!-- For favicon png -->
-		<link rel="shortcut icon" type="image/icon" href="assets/logo/favicon.png"/>
+		<link rel="shortcut icon" type="image/icon" href="{% static 'images/favicon.ico' %}"/>
        
         <!--font-awesome.min.css-->
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
         <!--linear icon css-->
-		<link rel="stylesheet" href="assets/css/linearicons.css">
+		<link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
 
 		<!--animate.css-->
-        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="{% static 'css/animate.css' %}">
 
 		<!--flaticon.css-->
-        <link rel="stylesheet" href="assets/css/flaticon.css">
-
+        <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+		
 		<!--slick.css-->
-        <link rel="stylesheet" href="assets/css/slick.css">
-		<link rel="stylesheet" href="assets/css/slick-theme.css">
+        <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+		<link rel="stylesheet" href="{% static 'css/slick-theme.css' %}">
 		
         <!--bootstrap.min.css-->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 		
 		<!-- bootsnav -->
-		<link rel="stylesheet" href="assets/css/bootsnav.css" >	
+		<link rel="stylesheet" href="{% static 'css/bootsnav.css' %}" >	
         
         <!--style.css-->
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="{% static 'css/style1.css' %}">
         
         <!--responsive.css-->
-        <link rel="stylesheet" href="assets/css/responsive.css">
+        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+		<!--FontAwsome icons-->
+		<script src="https://kit.fontawesome.com/b878741fb6.js" crossorigin="anonymous"></script>
         
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -146,7 +150,7 @@
 								<input type="text" placeholder="Ex: Horror, Thriller, Comedy..." />
 							</form>
 							<div class="welcome-hero-form-icon">
-								<i class="flaticon-gps-fixed-indicator"></i>
+								<i class="fa-solid fa-book" style="font-size:25px;color:black;"></i>
 							</div>
 						</div>
 					</div>
@@ -1087,32 +1091,32 @@
 		<!--footer end-->
 		
 		<!-- Include all js compiled plugins (below), or include individual files as needed -->
-
-		<script src="assets/js/jquery.js"></script>
+		
+		<script src="{% static 'js/jquery.js' %}"></script>
         
         <!--modernizr.min.js-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		
 		<!--bootstrap.min.js-->
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
 		
 		<!-- bootsnav js -->
-		<script src="assets/js/bootsnav.js"></script>
+		<script src="{% static 'js/bootsnav.js' %}"></script>
 
         <!--feather.min.js-->
-        <script  src="assets/js/feather.min.js"></script>
+        <script  src="{% static 'js/feather.min.js' %}"></script>
 
         <!-- counter js -->
-		<script src="assets/js/jquery.counterup.min.js"></script>
-		<script src="assets/js/waypoints.min.js"></script>
+		<script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+		<script src="{% static 'js/waypoints.min.js' %}"></script>
 
         <!--slick.min.js-->
-        <script src="assets/js/slick.min.js"></script>
+        <script src="{% static 'js/slick.min.js' %}"></script>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 		     
         <!--Custom JS-->
-        <script src="assets/js/custom.js"></script>
+        <script src="{% static 'js/custom.js' %}"></script>
         
     </body>
 	
