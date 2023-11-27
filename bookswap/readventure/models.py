@@ -22,14 +22,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     contact_no = models.CharField(max_length=15, default='N/A')
     
-    username = models.CharField(max_length=30, unique=True, default='N/A')
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    # username = models.CharField(max_length=30, unique=True, default='N/A')
+    # is_active = models.BooleanField(default=True)
+    # is_staff = models.BooleanField(default=False)
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'student_id', 'email', 'contact_no']
+    USERNAME_FIELD = 'student_id'
+    # REQUIRED_FIELDS = ['first_name', 'last_name', 'student_id', 'email', 'contact_no']
 
     def __str__(self):
-        return self.username
+        return self.student_id
