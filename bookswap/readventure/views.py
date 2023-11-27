@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.http import HttpResponse
+from .forms import SignUpForm
+from .models import User
 
 def sign_in(request):
     if request.method == 'POST':
@@ -29,3 +29,16 @@ def home(request):
     
 def sign_up(request):
     return render(request, 'readventure/sign_up.html')
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('sign_in')  # Redirect to a success page or any other page
+        else:
+            print(form.errors)
+    else:
+        form = SignUpForm()
+    
+    return render(request, 'readventure/sign_up.html', {'form': form})

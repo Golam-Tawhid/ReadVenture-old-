@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-p7$fkjb)vbqlls01^4zu4-psyb+zy+hp&#j-^vw2wra9a=+1v#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -68,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bookswap.wsgi.application'
+WSGI_APPLICATION = 'bookswap.wsgi.app'
 
 
 # Database
@@ -85,15 +84,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "OPTIONS": {
-#             "read_default_file": "/C:/ProgramData/MySQL/MySQL Server 8.0/my.cnf",
-#         },
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
