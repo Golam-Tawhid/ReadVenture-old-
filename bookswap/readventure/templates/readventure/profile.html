@@ -59,26 +59,26 @@
                 <button id="savebutton">edit</button> 
             </div> 
             <div class="forms"> 
-                <div class="inputs"> 
-                    <span>First Name</span> 
-                    <input type="text" readonly value="John"> 
-                </div> 
-                <div class="inputs"> 
-                    <span>Last Name</span> 
-                    <input type="text" readonly value="Doe"> 
-                </div> 
-                <div class="inputs"> 
-                    <span>Email</span> 
-                    <input type="email" readonly value="john.doe12@gmail.com"> 
-                </div> 
-                <div class="inputs"> 
-                    <span>Student ID</span> 
-                    <input type="text" readonly value="johndoe12"> 
-                </div> 
-                <div class="inputs"> 
-                    <span>Contact No.</span> 
-                    <input type="text" readonly value="United States"> 
-                </div> 
+                <div class="inputs">
+                    <span>First Name</span>
+                    <input type="text" readonly value="{{ user.first_name }}">
+                </div>
+                <div class="inputs">
+                    <span>Last Name</span>
+                    <input type="text" readonly value="{{ user.last_name }}">
+                </div>
+                <div class="inputs">
+                    <span>Email</span>
+                    <input type="email" readonly value="{{ user.email }}">
+                </div>
+                <div class="inputs">
+                    <span>Student ID</span>
+                    <input type="text" readonly value="{{ user.student_id }}">
+                </div>
+                <div class="inputs">
+                    <span>Contact No.</span>
+                    <input type="text" readonly value="{{ user.contact_no }}">
+                </div>
             </div> 
         </div>
     </div>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import SignUpForm
-from .models import User
+from django.contrib.auth.decorators import login_required
 
 def sign_in(request):
     if request.method == 'POST':
@@ -32,7 +32,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('profilepic')
+            return redirect('sign_in')
         else:
             print(form.errors)
     else:
@@ -43,8 +43,8 @@ def signup(request):
 def sign_up(request):
     return render(request, 'readventure/sign_up.html')
 
+@login_required
 def profile(request):
-    return render(request, 'readventure/profile.html')
-
-def profilepic(request):
-    return render(request, 'readventure/profilepic.html')
+    user = request.user
+    context = {'user': user}
+    return render(request, 'readventure/profile.html', context)
