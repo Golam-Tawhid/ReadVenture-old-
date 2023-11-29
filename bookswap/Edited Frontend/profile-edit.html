@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY PROFILE</title>
+    <link rel="stylesheet" href="css/profiledown.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var savebutton = document.getElementById('savebutton');
+            var readonly = true;
+            var inputs = document.querySelectorAll('.forms input[type="text"]');
+            var profilePictureInput = document.getElementById('profilePictureInput');
+            var profilePicture = document.getElementById('profilePicture');
+
+            savebutton.addEventListener('click', function () {
+                for (var i = 0; i < inputs.length; i++) {
+                    inputs[i].toggleAttribute('readonly');
+                }
+
+                // Toggle the disabled attribute for the profile picture input
+                profilePictureInput.toggleAttribute('disabled');
+
+                if (savebutton.innerHTML == "edit") {
+                    savebutton.innerHTML = "save";
+                } else {
+                    savebutton.innerHTML = "edit";
+                }
+            });
+
+            // Handle profile picture change
+            profilePictureInput.addEventListener('change', function (event) {
+                var file = event.target.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        profilePicture.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <header>
+        <nav><a href="homee.html" style="font-size: 32px;">ReadVenture</a></nav>
+        <nav>
+            <a href="homee.html">HOME</a>
+            <a href="mybooks.html">MY BOOKS</a>
+            <a href="#wishlist">WISHLIST</a>
+            <a href="#borrowedbooks">BORROWED</a>
+            <a href="profile-edit.html " style="margin-right: 20px; color: rgb(217, 196, 255);">PROFILE</a>
+        </nav>
+    </header>
+
+    <div class="container" style="background-image: url(image/home.jpg)">
+        <div class="card">
+            <div class="info">
+                <span>Profile Info</span>
+                <button id="savebutton">edit</button>
+            </div>
+            <div class="content">
+                <div class="forms">
+                    <!-- Existing form inputs go here -->
+                    <div class="inputs"> 
+                        <span>First Name</span> 
+                        <input type="text" readonly value="John"> 
+                    </div> 
+                    <div class="inputs"> 
+                        <span>Last Name</span> 
+                        <input type="text" readonly value="Doe"> 
+                    </div> 
+                    <div class="inputs"> 
+                        <span>Email</span> 
+                        <input type="text" readonly value="john.doe12@gmail.com"> 
+                    </div> 
+                    <div class="inputs"> 
+                        <span>Student ID</span> 
+                        <input type="text" readonly value="johndoe12"> 
+                    </div> 
+                    <div class="inputs"> 
+                        <span>Contact No.</span> 
+                        <input type="text" readonly value="United States"> 
+                    </div> 
+                </div>
+                <div class="image-container">
+                    <div class="inputs">
+                        <span>Profile Picture</span>
+                        <img id="profilePicture" src="image/profile.jpg" alt="Profile Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+                        <div id="profilePictureInput" class="file-input-container">
+                            <input type="file" id="fileInput" accept="image/*" class="file-input" />
+                            <label for="fileInput" class="file-label">Upload Photo</label>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
