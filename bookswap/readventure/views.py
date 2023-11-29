@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.http import HttpResponse
+from .forms import SignUpForm
+from django.contrib.auth.decorators import login_required
 
 def sign_in(request):
     if request.method == 'POST':
@@ -21,11 +21,30 @@ def sign_in(request):
 
 def home(request):
     if request.session.get('login_success'):
-        del request.session['login_success']  # Remove the session variable to avoid showing the message on page refresh
+        # del request.session['login_success']  # Remove the session variable to avoid showing the message on page refresh
         return render(request, 'readventure/home.html')
     else:
         # Redirect to the login page if there's no successful login session
         return redirect('sign_in')
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('sign_in')
+        else:
+            print(form.errors)
+    else:
+        form = SignUpForm()
     
+    return render(request, 'readventure/sign_up.html', {'form': form})
+
 def sign_up(request):
     return render(request, 'readventure/sign_up.html')
+
+@login_required
+def profile(request):
+    user = request.user
+    context = {'user': user}
+    return render(request, 'readventure/profile.html', context)

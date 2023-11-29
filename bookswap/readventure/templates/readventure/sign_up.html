@@ -23,35 +23,38 @@
 				<div class="image-holder">
 				  <img src="{% static 'images/img1.jpg' %}" alt="">
 				</div>
-				<form action="">
-					<h3>Tell Us About Yourself!</h3>
+				<form method="post" action="{% url 'signup' %}">
+					{% csrf_token %}
+					{{ form.as_p }}
+					{% if error_message %}
+						<p style="color: red;">{{ error_message }}</p>
+					{% endif %}
 					<div class="form-group">
-						<input type="text" placeholder="First Name" class="form-control">
-						<input type="text" placeholder="Last Name" class="form-control">
+						<input type="text" name="first_name" placeholder="First Name" class="form-control">
+						<input type="text" name="last_name" placeholder="Last Name" class="form-control">
 					</div>
 					<div class="form-wrapper">
-						<input type="text" placeholder="Student ID" class="form-control">
+						<input type="text" name="student_id" placeholder="Student ID" class="form-control">
 						<i class="zmdi zmdi-account"></i>
 					</div>
 					<div class="form-wrapper">
-						<input type="text" placeholder="Email Address" class="form-control">
+						<input type="text" name="email" placeholder="Email Address" class="form-control">
 						<i class="zmdi zmdi-email"></i>
 					</div>
 					<div class="form-wrapper">
-						<input type="text" placeholder="Contact No." class="form-control">
+						<input type="text" name="contact_no" placeholder="Contact No." class="form-control">
 					</div>
 					<div class="form-wrapper">
-						<input type="password" placeholder="Password" class="form-control">
+						<input type="password" name="password1" placeholder="Password" class="form-control">
 						<i class="zmdi zmdi-lock"></i>
 					</div>
 					<div class="form-wrapper">
-						<input type="password" placeholder="Confirm Password" class="form-control">
+						<input type="password" name="password2" placeholder="Confirm Password" class="form-control">
 						<i class="zmdi zmdi-lock"></i>
 					</div>
-					<button> Next page ⁠(⁠◕⁠ᴗ⁠◕⁠)
-						<i class="zmdi zmdi-arrow-right"></i>
-					</button>
+					<button type="submit">Next page ⁠(⁠◕⁠ᴗ⁠◕⁠) <i class="zmdi zmdi-arrow-right"></i></button>
 				</form>
+				
 			</div>
 		</div>
 		

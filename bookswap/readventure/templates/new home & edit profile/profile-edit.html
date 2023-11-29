@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Edit</title>
+    <link rel="stylesheet" href="profiledown.css">
+    <style>
+        /* Additional styles for the top bar */
+        header {
+            position: fixed; /* Make the header fixed */
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: flex-end; /* Align items to the right */
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            padding: 15px;
+            margin: 0 10px;
+            transition: color 0.3s;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        .brand {
+            font-weight: bold;
+        }
+
+        .container {
+            padding-top: 50px; /* Adjust based on your top bar height */
+            background-image: url(home.jpg);
+            background-size: cover;
+            background-position: center;
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">ReadVenture</div>
+        <nav>
+            <a href="homee.html">Home</a>
+            <a href="#mybooks">My Books</a>
+            <a href="#wishlist">Wishlist</a>
+            <a href="#borrowedbooks">Borrowed Books</a>
+            <a href="profile-edit.html">Profile</a>
+        </nav>
+    </header>
+
+    <div class="container"> 
+        <div class="card"> 
+            <div>
+                
+            </div>
+            <div>
+                <div class="info"> 
+                    <span>Profile Info</span> 
+                    <button id="savebutton">edit</button> 
+                </div> 
+                <div class="forms"> 
+                    <div class="inputs"> 
+                        <span>First Name</span> 
+                        <input type="text" readonly value="John"> 
+                    </div> 
+                    <div class="inputs"> 
+                        <span>Last Name</span> 
+                        <input type="text" readonly value="Doe"> 
+                    </div> 
+                    <div class="inputs"> 
+                        <span>Email</span> 
+                        <input type="email" readonly value="john.doe12@gmail.com"> 
+                    </div> 
+                    <div class="inputs"> 
+                        <span>Student ID</span> 
+                        <input type="text" readonly value="johndoe12"> 
+                    </div> 
+                    <div class="inputs"> 
+                        <span>Contact No.</span> 
+                        <input type="text" readonly value="United States"> 
+                    </div> 
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var savebutton = document.getElementById('savebutton');
+            var readonly = true;
+            var inputs = document.querySelectorAll('input[type="text"]');
+            
+            savebutton.addEventListener('click', function () {
+                for (var i = 0; i < inputs.length; i++) {
+                    inputs[i].toggleAttribute('readonly');
+                }
+
+                if (savebutton.innerHTML == "edit") {
+                    savebutton.innerHTML = "save";
+                } else {
+                    savebutton.innerHTML = "edit";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
