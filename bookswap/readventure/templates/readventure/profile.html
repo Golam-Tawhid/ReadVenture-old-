@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Edit</title>
-    <link rel="stylesheet" href="profiledown.css">
+    <link rel="stylesheet" href="{% static 'css/profiledown.css' %}">
     <style>
         /* Additional styles for the top bar */
         .top-bar {
@@ -44,11 +44,11 @@
             <span>ReadVenture</span>
         </div>
         <div class="top-bar-right">
-            <a href="#home">HOME</a>
-            <a href="#explore">BOOKLIST</a>
+            <a href="{% url 'home' %}">HOME</a>
+            <a href="{% url 'home' %}">BOOKLIST</a>
             <a href="#reviews">WISHLIST</a>
             <a href="#blog">BORROWED LIST</a>
-            <a href="#contact">PREFERENCES</a>
+            <!-- <a href="#contact">PREFERENCES</a> -->
         </div>
     </div>
 

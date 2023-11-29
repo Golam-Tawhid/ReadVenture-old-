@@ -21,24 +21,30 @@ def sign_in(request):
 
 def home(request):
     if request.session.get('login_success'):
-        del request.session['login_success']  # Remove the session variable to avoid showing the message on page refresh
+        # del request.session['login_success']  # Remove the session variable to avoid showing the message on page refresh
         return render(request, 'readventure/home.html')
     else:
         # Redirect to the login page if there's no successful login session
         return redirect('sign_in')
-    
-def sign_up(request):
-    return render(request, 'readventure/sign_up.html')
 
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('sign_in')  # Redirect to a success page or any other page
+            return redirect('profilepic')
         else:
             print(form.errors)
     else:
         form = SignUpForm()
     
     return render(request, 'readventure/sign_up.html', {'form': form})
+
+def sign_up(request):
+    return render(request, 'readventure/sign_up.html')
+
+def profile(request):
+    return render(request, 'readventure/profile.html')
+
+def profilepic(request):
+    return render(request, 'readventure/profilepic.html')

@@ -5,9 +5,9 @@
   
 
   <title>profile</title>
-  <link rel="stylesheet" href="css/dp.css">
-  <link rel="stylesheet" href="css/style.css">
-  
+  <link rel="stylesheet" href="{% static 'css/dp.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
   <script>
     var loadFile = function (event) {
     var image = document.getElementById("output");
@@ -16,10 +16,10 @@
   </script>
 </head>
 <body>
-  <div class="wrapper" style="background-image: url('images/img6.jpg');">
+  <div class="wrapper" style="background-image: url('/static/images/img6.jpg');">
     <div class="innerx">
         <h1 class="text">Upload Your Profile Picture</h1>
-        <img class="img" src="images/profile.jpg" id="output" width="200" />
+        <img class="img" src="{% static 'images/profile.jpg' %}" id="output" width="200" />
         <label class="label" for="file">
           <span class="glyphicon glyphicon-camera"></span>
           <span>Change Image</span>
@@ -28,7 +28,6 @@
         <button class="buttons"><h3>Next Page</h1></button>
     </div>
   </div>
-  
   
 </body>
 </html>
