@@ -1,0 +1,181 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url(image/moyemoye.jpg);
+  padding-top: 80px; /* Adjust the padding to make room for the fixed navbar */; /* Add the path to your background image */
+  background-size: cover; /* Ensure the background image covers the entire viewport */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-attachment: fixed; /* Fixed background */
+
+}
+
+.navbar {
+  background-color: #333;
+  padding: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed; /* Make the navbar fixed at the top */
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 15px; /* Adjust the padding for links */
+  margin: 0 10px;
+  transition: color 0.3s;
+  font-size: 18px; /* Adjust font size for links */
+}
+
+
+.navbar a:hover {
+  color: #4CAF50;
+}
+
+.brand {
+  font-size: 32px;
+  color: #fff;
+
+}
+
+.book-details {
+  display: flex;
+  max-width: 800px; /* Adjust the max-width based on your design */
+  margin: 50px auto;
+  background-color: #ffffff9c;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  color: black;
+}
+
+
+.image-block {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-cover {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+}
+
+.buttons-section {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #ffffff00;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.buttons-section button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.buttons-section button:hover {
+  background-color: #45a049;
+}
+
+.details-section {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto; /* Allow the details to scroll if needed */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.details-box {
+  border: 1px solid #0000004d;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.details-section h2 {
+  color: #000000;
+}
+
+.details-section p {
+  margin: 10px 0;
+  color: black;
+  font-size: 20px;
+}
+
+/* Additional sections for reviews and ratings */
+
+.reviews-section {
+  padding: 20px;
+  border-top: 1px solid #ddd;
+}
+.reviews-section h2 {
+  background-color:#ffffff9c;
+  text-align: center;
+  padding: 20px;
+}
+
+.ratings-section {
+  padding: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.average-rating {
+  font-size: 20px;
+  color: black;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  padding-left: 17px;
+}
+.review Rating {
+  display: inline-blocks;
+}
+
+.review {
+  border: 1px solid #ddd;;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  background-color: #ffffff9c;
+}
+
+.review h3 {
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #000000;
+  background-color: white;
+  
+}
+
+.review p {
+  margin-bottom: 10px;
+  color: #000000;
+  font-size: 18px;
+  background-color: white;
+}
+
+.title {
+text-align: center;
+}
+.star-rating {
+  color: rgb(18, 141, 14);
+}
