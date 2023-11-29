@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadVenture - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed; /* Make the header fixed */
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+            text-align: right;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 16px;
+            display: inline-block;
+            margin: 0 10px;
+            transition: color 0.3s;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        section {
+            height: 100vh;
+            padding: 80px 20px; /* Adjusted padding to account for fixed header */
+            text-align: center;
+            color: #fff; /* Set text color to make it readable on the background image */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        section#home {
+            background-image: url('/static/images/home.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        section:nth-child(even) {
+            background-color: #ddd;
+        }
+
+        .search-container {
+            margin-top: 20px;
+            width: 70%; /* Increased width */
+        }
+
+        input[type=text] {
+            width: 80%; /* Increased width */
+            padding: 14px 20px; /* Adjusted padding */
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        select {
+            padding: 14px 20px; /* Adjusted padding */
+            margin: 8px 0;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px; /* Adjusted padding */
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .centered-text {
+            font-size: 55px; /* Increased font size even further */
+            margin-bottom: 10px; /* Adjusted margin */
+        }
+
+        .smaller-text {
+            font-size: 24px; /* Smaller font size */
+            margin-bottom: 20px; /* Adjusted margin */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ReadVenture</h1>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'mybooks' %}">My Books</a>
+            <a href="#wishlist">Wishlist</a>
+            <a href="#borrowedbooks">Borrowed Books</a>
+            <a href="{% url 'profile' %}">Profile</a>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2 class="centered-text">Where pages become passports and<br> books become bridges between readers</h2>
+        <p class="smaller-text">Find Best Place, Restaurant, Hotel, Real State, and many more things in just One click</p>
+        <div class="search-container">
+            <input type="text" placeholder="Search...">
+            <select>
+                <option value="all">All</option>
+                <option value="author">Author</option>
+                <option value="title">Title</option>
+            </select>
+            <button type="button">Search</button>
+        </div>
+        <!-- Your home section content goes here -->
+    </section>
+
+    <section id="mybooks">
+        <h2>My Books Section</h2>
+        <!-- Your My Books section content goes here -->
+    </section>
+
+    <section id="wishlist">
+        <h2>Wishlist Section</h2>
+        <!-- Your Wishlist section content goes here -->
+    </section>
+
+    <section id="borrowedbooks">
+        <h2>Borrowed Books Section</h2>
+        <!-- Your Borrowed Books section content goes here -->
+    </section>
+
+</body>
+</html>

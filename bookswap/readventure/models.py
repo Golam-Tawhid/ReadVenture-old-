@@ -33,3 +33,29 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.student_id
+    
+class Books(models.Model):
+    # Add the additional fields
+    title = models.CharField(max_length=100, default='N/A')
+    author = models.CharField(max_length=30, default='N/A')
+    isbn = models.CharField(max_length=20, unique=True, default='N/A')
+    genre = models.CharField(max_length=30, default='N/A')
+    category = models.CharField(max_length=30, default='N/A')
+    cover_image = models.ImageField(upload_to='images/', default='images/default.jpg')
+    book_id = models.CharField(max_length=20, unique=True, default='N/A')
+    owner_id = models.CharField(max_length=20, default='N/A')
+    language = models.CharField(max_length=30, default='N/A')
+    conditon = models.CharField(max_length=30, default='N/A')
+
+    def __str__(self):
+        return self.book_id
+    
+
+class Receipt(models.Model):
+    # Add the additional fields
+    recept_no = models.CharField(max_length=20, unique=True, default='N/A')
+    book_id = models.CharField(max_length=20, default='N/A')
+    borrower_id = models.CharField(max_length=20, default='N/A')
+    due_date = models.DateField(auto_now=False, auto_now_add=False, default='N/A')
+    return_date = models.DateField(auto_now=False, auto_now_add=False, default='N/A')
+    
