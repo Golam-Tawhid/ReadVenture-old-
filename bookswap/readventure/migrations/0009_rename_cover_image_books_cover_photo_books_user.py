@@ -14,8 +14,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RenameField(
             model_name='books',
-            old_name='cover_image',
-            new_name='cover_image',
+            old_name='cover_photo',
+            new_name='cover_photo',
         ),
         migrations.AddField(
             model_name='books',
