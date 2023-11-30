@@ -89,12 +89,15 @@ def borrowed(request):
 @login_required
 def addbooks(request):
     if request.method == 'POST':
-        form = Addbooksform(request.POST)
+        form = Addbooksform(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            #book = form.save(commit=False)
+            #book.user = request.user 
+            #book.save()
+            form.save(user=request.user)
             return redirect('mybooks')
-        else:
-            print(form.errors)
+        
+            
     else:
         form = Addbooksform()
     

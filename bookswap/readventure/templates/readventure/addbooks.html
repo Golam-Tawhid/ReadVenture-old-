@@ -64,7 +64,7 @@
                 <button id="savebutton">edit</button>
             </div>
             <div class="content">
-                <form method="post" action="{% url 'add_book' %}" enctype="multipart/form-data">
+                <form method="post" action="{% url 'addbooks' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="forms">
                         <div class="inputs">

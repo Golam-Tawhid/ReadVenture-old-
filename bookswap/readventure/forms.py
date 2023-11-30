@@ -18,5 +18,12 @@ class SignUpForm(UserCreationForm):
 class Addbooksform(forms.ModelForm):
     class Meta:
         model= Books
-        fields =  ['title', 'author', 'isbn', 'genre', 'category','language'] 
+        fields =  ['title', 'author', 'isbn', 'genre', 'category','language','cover_image'] 
         #'cover_image', 'book_id','owner_id','language','condition']
+
+    def save(self, user, commit=True):
+        instance = super().save(commit=False)
+        instance.user = user
+        if commit:
+            instance.save()
+        return instance
