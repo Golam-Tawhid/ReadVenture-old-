@@ -21,6 +21,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     student_id = models.CharField(max_length=20, unique=True, default='N/A')
     email = models.EmailField(unique=True)
     contact_no = models.CharField(max_length=15, default='N/A')
+    admin= models.BooleanField(default=False)
+    regular= models.BooleanField(default=True)
     
     # username = models.CharField(max_length=30, unique=True, default='N/A')
     # is_active = models.BooleanField(default=True)
@@ -47,8 +49,6 @@ class Books(models.Model):
     language = models.CharField(max_length=30, default='N/A')
     #conditon = models.CharField(max_length=30, default='N/A')
     user = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
-    admin= models.BooleanField(default=False)
-    regular= models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
