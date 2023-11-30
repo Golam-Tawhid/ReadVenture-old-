@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .forms import SignUpForm
+from .forms import SignUpForm,Addbooksform
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Books
@@ -78,11 +78,29 @@ def borrowed(request):
     }
     return render(request, 'readventure/borrowed.html', context)
 
-def addbooks(request):
+#def addbooks(request):
     # Assuming you want to render a template called 'add_books.html'
     # You can pass any necessary context data to this template
-    context = {
-        'books': Books.objects.all(),  # Assuming Book is a model representing books
+    #context = {
+        #'books': Books.objects.all(),  # Assuming Book is a model representing books
         # Other context data...
-    }
-    return render(request, 'readventure/addbooks.html', context)
+    #}
+    #return render(request, 'readventure/addbooks.html', context)
+@login_required
+def addbooks(request):
+    if request.method == 'POST':
+        form = Addbooksform(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('mybooks')
+        else:
+            print(form.errors)
+    else:
+        form = Addbooksform()
+    
+    return render(request, 'readventure/mybooks.html', {'form': form})
+
+    
+
+
+
