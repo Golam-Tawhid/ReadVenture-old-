@@ -11,4 +11,5 @@ urlpatterns = [
     path('mybooks/', views.mybooks, name='mybooks'),
     path('wishlist/', views.wishlist, name='wishlist'),
     path('borrowed/', views.borrowed, name='borrowed'),
+    path('addbooks/', views.addbooks, name='addbooks'),
 ]

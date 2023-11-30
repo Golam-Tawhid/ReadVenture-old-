@@ -77,3 +77,12 @@ def borrowed(request):
         # Other context data...
     }
     return render(request, 'readventure/borrowed.html', context)
+
+def addbooks(request):
+    # Assuming you want to render a template called 'add_books.html'
+    # You can pass any necessary context data to this template
+    context = {
+        'books': Books.objects.all(),  # Assuming Book is a model representing books
+        # Other context data...
+    }
+    return render(request, 'readventure/addbooks.html', context)
