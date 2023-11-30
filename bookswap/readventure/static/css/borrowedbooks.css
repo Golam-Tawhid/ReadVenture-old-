@@ -1,0 +1,99 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-size: cover;
+    margin: 0;
+    padding: 0px;
+  }
+  
+  header {
+    position: fixed; /* Make the header fixed */
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  nav {
+    background-color: #333;
+    overflow: hidden;
+    text-align: right;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    padding: 9px;
+    display: inline-block;
+    margin: 0 10px;
+    transition: color 0.3s;
+    font-size: 18px;
+  }
+  
+  nav a:hover {
+    color: #4CAF50;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .lower {
+    padding-top: 100px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  
+  
+  .book {
+    display: inline-block;
+    width: 250px;
+    /* border: 1px solid #ffffff; */
+    border-radius: 8px;
+    padding: 10px; /* Reduced padding */
+    margin: 14px; /* Reduced margin */
+    background-color: rgba(0, 0, 0, 0.63);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .book h2 {
+    margin-bottom: 5px;
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .book p {
+    margin: 5px 0;
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+  }
+  
+  .book img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 5px; /* Reduced margin */
+  }
+  
+  button {
+  padding: 8px;
+  width: 130px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  color: white;
+  background-color: #3333339a;
+  border-color: #222;
+  border-radius: 7%;
+  border-style: none;
+  
+  } 
+  button:hover {
+  cursor: pointer;
+  color: rgb(217, 196, 255) ;
+  background-color: #444
+  }
