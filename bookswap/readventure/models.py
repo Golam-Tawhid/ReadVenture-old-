@@ -41,7 +41,7 @@ class Books(models.Model):
     isbn = models.CharField(max_length=20, unique=True, default='N/A')
     genre = models.CharField(max_length=30, default='N/A')
     category = models.CharField(max_length=30, default='N/A')
-    cover_image = models.ImageField(upload_to='images/', default='images/default.jpg')
+    cover_photo = models.ImageField(upload_to='images/', default='images/default.jpg')
     #book_id = models.CharField(max_length=20, unique=True, default='N/A')
     #owner_id = models.CharField(max_length=20, default='N/A')
     language = models.CharField(max_length=30, default='N/A')

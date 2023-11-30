@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('isbn', models.CharField(default='N/A', max_length=20, unique=True)),
                 ('genre', models.CharField(default='N/A', max_length=30)),
                 ('category', models.CharField(default='N/A', max_length=30)),
-                ('cover_image', models.ImageField(default='images/default.jpg', upload_to='images/')),
+                ('cover_photo', models.ImageField(default='images/default.jpg', upload_to='images/')),
                 ('book_id', models.CharField(default='N/A', max_length=20, unique=True)),
                 ('owner_id', models.CharField(default='N/A', max_length=20)),
                 ('language', models.CharField(default='N/A', max_length=30)),
