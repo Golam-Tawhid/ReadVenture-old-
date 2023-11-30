@@ -8,27 +8,27 @@
     <title>Add Books</title>
     <link rel="stylesheet" href="{% static 'css/addbooks.css' %}">
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var savebutton = document.getElementById('savebutton');
-            var readonly = true;
-            var inputs = document.querySelectorAll('.forms input[type="text"]');
-            var profilePictureInput = document.getElementById('profilePictureInput');
-            var profilePicture = document.getElementById('profilePicture');
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     var savebutton = document.getElementById('savebutton');
+        //     var readonly = true;
+        //     var inputs = document.querySelectorAll('.forms input[type="text"]');
+        //     var profilePictureInput = document.getElementById('profilePictureInput');
+        //     var profilePicture = document.getElementById('profilePicture');
 
-            savebutton.addEventListener('click', function () {
-                for (var i = 0; i < inputs.length; i++) {
-                    inputs[i].toggleAttribute('readonly');
-                }
+        //     savebutton.addEventListener('click', function () {
+        //         for (var i = 0; i < inputs.length; i++) {
+        //             inputs[i].toggleAttribute('readonly');
+        //         }
 
-                // Toggle the disabled attribute for the profile picture input
-                profilePictureInput.toggleAttribute('disabled');
+        //         // Toggle the disabled attribute for the profile picture input
+        //         profilePictureInput.toggleAttribute('disabled');
 
-                if (savebutton.innerHTML == "edit") {
-                    savebutton.innerHTML = "save";
-                } else {
-                    savebutton.innerHTML = "edit";
-                }
-            });
+        //         if (savebutton.innerHTML == "edit") {
+        //             savebutton.innerHTML = "save";
+        //         } else {
+        //             savebutton.innerHTML = "edit";
+        //         }
+        //     });
 
             // Handle profile picture change
             profilePictureInput.addEventListener('change', function (event) {
@@ -41,7 +41,7 @@
                     reader.readAsDataURL(file);
                 }
             });
-        });
+        // });
 
     </script>
 </head>
@@ -57,48 +57,38 @@
         </nav>
     </header>
 
-    <div class="container" style="background-image: url(/static/image/home.jpg);background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+    <div class="container" style="background-image: url(image/home.jpg);background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
         <div class="card">
             <div class="info">
                 <span>Enter Book Info:</span>
-                <button id="savebutton">edit</button>
+                <!-- <button id="savebutton">edit</button> -->
             </div>
             <div class="content">
                 <form method="post" action="{% url 'addbooks' %}" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <input type="hidden" name="user" value="{{ user.id }}">
-                    <div class="forms">
-                        <div class="inputs">
-                            <span>Title</span>
-                            {{ form.title }}
-                        </div>
-                        <div class="inputs">
-                            <span>Author <i style="font-size: 12px; color: rgb(30, 0, 161);">*Use "," to separate multiple Authors</i></span>
-                            {{ form.author }}
-                        </div>
-                        <div class="inputs">
-                            <span>ISBN</span>
-                            {{ form.isbn }}
-                        </div>
-                        <div class="inputs">
-                            <span>Genre</span>
-                            {{ form.genre }}
-                        </div>
-                        <div class="inputs">
-                            <span>Category</span>
-                            {{ form.category }}
-                        </div>
-                        <div class="inputs">
-                            <span>Language</span>
-                            {{ form.language }}
-                        </div>
-                    </div>
-                    <div class="image-container">
-                        <div class="inputs">
-                            <span>Cover Photo</span>
-                            {{ form.cover_image }}
-                        </div>
-                    </div>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+            
+                    <label for="author">Author:</label>
+                    <input type="text" id="author" name="author" required>
+            
+                    <label for="isbn">ISBN:</label>
+                    <input type="text" id="isbn" name="isbn" required>
+            
+                    <label for="genre">Genre:</label>
+                    <input type="text" id="genre" name="genre" required>
+            
+                    <label for="category">Category:</label>
+                    <input type="text" id="category" name="category" required>
+            
+                    <label for="cover_image">Cover Photo:</label>
+                    <input type="file" id="cover_image" name="cover_image" accept="image/*" required>
+            
+                    <label for="language">Language:</label>
+                    <input type="text" id="language" name="language" required>
+            
+                    <!-- Add other fields as needed -->
+            
                     <button type="submit">Save</button>
                 </form>
             </div>

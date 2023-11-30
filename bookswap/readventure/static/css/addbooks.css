@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
-  padding: 0;
-  margin: 0;
+  padding: 20px;
+  margin-left: 20px;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -44,6 +44,7 @@
 
 .card .content {
   display: flex;
+  height: 200px;
 }
 
 .card .forms {
