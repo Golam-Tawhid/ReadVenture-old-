@@ -61,17 +61,18 @@ addBook("Book 4", "Author 4", "Mystery", "Thriller", "German", "6543210987", "bo
         <nav>
             <a href="{% url 'home' %}">HOME</a>
             <a href="{% url 'mybooks' %}" style="color: rgb(217, 196, 255);">MY BOOKS</a>
-            <a href="#wishlist">WISHLIST</a>
-            <a href="#borrowedbooks">BORROWED</a>
+            <a href="{% url 'wishlist' %}">WISHLIST</a>
+            <a href="{% url 'borrowed' %}">BORROWED</a>
             <a href="{% url 'profile' %}" style="margin-right: 20px;">PROFILE</a>
         </nav>
     </header>
-    <section class="lower" style="background-image: url(image/photo-1419640303358-44f0d27f48e7.jpg);">
+    <section class="lower" style="background-image: url(/static/images/booklist.jpg);">
         <div>
-            <button>Add Books</button>
+            <a href="{% url 'addbooks' %}">
+                <button>Add Books</button>
+            </a>
             <button>Remove Books</button>
         </div>
-
 
         <!-- Book 1 -->
         <div class="book">
