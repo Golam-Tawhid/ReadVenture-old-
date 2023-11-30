@@ -59,3 +59,21 @@ def mybooks(request):
         # Other context data...
     }
     return render(request, 'readventure/mybooks.html', context)
+
+def wishlist(request):
+    # Assuming you want to render a template called 'wishlist.html'
+    # You can pass any necessary context data to this template
+    context = {
+        'books': Books.objects.all(),  # Assuming Book is a model representing books
+        # Other context data...
+    }
+    return render(request, 'readventure/wishlist.html', context)
+
+def borrowed(request):
+    # Assuming you want to render a template called 'borrowed.html'
+    # You can pass any necessary context data to this template
+    context = {
+        'books': Books.objects.all(),  # Assuming Book is a model representing books
+        # Other context data...
+    }
+    return render(request, 'readventure/borrowed.html', context)

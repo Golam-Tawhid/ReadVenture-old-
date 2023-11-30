@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Books</title>
-    <link rel="stylesheet" href="css/addbooks.css">
+    <link rel="stylesheet" href="{% static 'css/addbooks.css' %}">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var savebutton = document.getElementById('savebutton');
@@ -45,17 +46,17 @@
 </head>
 <body>
     <header>
-        <nav><a href="homee.html" style="font-size: 32px;">ReadVenture</a></nav>
+        <nav><a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a></nav>
         <nav>
-            <a href="homee.html">HOME</a>
-            <a href="mybooks.html">MY BOOKS</a>
+            <a href="{% url 'home' %}" style="color: rgb(217, 196, 255);">HOME</a>
+            <a href="{% url 'mybooks' %}">MY BOOKS</a>
             <a href="#wishlist">WISHLIST</a>
             <a href="#borrowedbooks">BORROWED</a>
-            <a href="profile-edit.html " style="margin-right: 20px;">PROFILE</a>
+            <a href="{% url 'profile' %}" style="margin-right: 20px;">PROFILE</a>
         </nav>
     </header>
 
-    <div class="container" style="background-image: url(image/home.jpg);background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+    <div class="container" style="background-image: url(/static/image/home.jpg);background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
         <div class="card">
             <div class="info">
                 <span>Enter Book Info:</span>
@@ -93,7 +94,7 @@
                 <div class="image-container">
                     <div class="inputs">
                         <span>Cover Photo</span>
-                        <img id="profilePicture" src="image/default-book.png" alt="Profile Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+                        <img id="profilePicture" src="{% static 'image/default-book.png' %}" alt="Profile Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
                         <div id="profilePictureInput" class="file-input-container">
                             <input type="file" id="fileInput" accept="image/*" class="file-input" />
                             <label for="fileInput" class="file-label">Upload Cover</label>
