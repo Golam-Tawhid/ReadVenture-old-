@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wishlist</title>
-    <link rel="stylesheet" href="css/wishlist.css">
+    <link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
     <script>
     function addBook(title, author, genre, category, language, isbn, coverImage) {
     var bookContainer = document.getElementById('bookContainer');
@@ -56,16 +57,16 @@ addBook("Book 4", "Author 4", "Mystery", "Thriller", "German", "6543210987", "bo
 <body>
 
     <header>
-        <nav><a href="homee.html" style="font-size: 32px;">ReadVenture</a></nav>
+        <nav><a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a></nav>
         <nav>
-            <a href="homee.html">HOME</a>
-            <a href="mybooks.html"></a>MY BOOKS</a>
-            <a href="#wishlist" style="color: rgb(217, 196, 255);">WISHLIST</a>
-            <a href="#borrowedbooks">BORROWED</a>
-            <a href="profile-edit.html" style="margin-right: 20px;">PROFILE</a>
+            <a href="{% url 'home' %}">HOME</a>
+            <a href="{% url 'mybooks' %}"></a>MY BOOKS</a>
+            <a href="{% url 'wishlist' %}" style="color: rgb(217, 196, 255);">WISHLIST</a>
+            <a href="{% url 'borrowed' %}">BORROWED</a>
+            <a href="{% url 'profile' %}" style="margin-right: 20px;">PROFILE</a>
         </nav>
     </header>
-    <section class="lower" style="background-image: url(image/9c7f5d41b42d3b01940be6cc72e325ed.jpg);">
+    <section class="lower" style="background-image: url(/static/images/wishlist.jpg);">
         <div>
             
         </div>
@@ -73,7 +74,7 @@ addBook("Book 4", "Author 4", "Mystery", "Thriller", "German", "6543210987", "bo
 
         <!-- Book 1 -->
         <div class="book">
-            <img src="image/art-book-cover-design-template-34323b0f0734dccded21e0e3bebf004c_screen.jpg" alt="Book 1 Cover"> <!-- Update the path to use forward slashes -->
+            <img src="{% static 'image/b.jpg' %}" alt="Book 1 Cover"> <!-- Update the path to use forward slashes -->
             <h2>Title: Book 1</h2>
             <p>Author: Author 1</p>
             <p>Genre: Fiction</p>
@@ -84,7 +85,7 @@ addBook("Book 4", "Author 4", "Mystery", "Thriller", "German", "6543210987", "bo
 
         <!-- Book 2 -->
         <div class="book">
-            <img src="image/art-book-cover-design-template-34323b0f0734dccded21e0e3bebf004c_screen.jpg" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
+            <img src="{% static 'image/b.jpg' %}" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
             <h2>Title: Book 2</h2>
             <p>Author: Author 2</p>
             <p>Genre: Non-fiction</p>
@@ -94,7 +95,7 @@ addBook("Book 4", "Author 4", "Mystery", "Thriller", "German", "6543210987", "bo
         </div>
         <!-- Book 3 -->
         <div class="book">
-            <img src="image/art-book-cover-design-template-34323b0f0734dccded21e0e3bebf004c_screen.jpg" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
+            <img src="{% static 'image/b.jpg' %}" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
             <h2>Title: Book 3</h2>
             <p>Author: Author 2</p>
             <p>Genre: Non-fiction</p>
@@ -104,7 +105,7 @@ addBook("Book 4", "Author 4", "Mystery", "Thriller", "German", "6543210987", "bo
         </div>
         <!-- Book 4 -->
         <div class="book">
-            <img src="image/art-book-cover-design-template-34323b0f0734dccded21e0e3bebf004c_screen.jpg" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
+            <img src="{% static 'image/b.jpg' %}" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
             <h2>Title: Book 4</h2>
             <p>Author: Author 4</p>
             <p>Genre: Non-fiction</p>
@@ -114,7 +115,7 @@ addBook("Book 4", "Author 4", "Mystery", "Thriller", "German", "6543210987", "bo
         </div>
 
         <div class="book">
-            <img src="image/art-book-cover-design-template-34323b0f0734dccded21e0e3bebf004c_screen.jpg" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
+            <img src="{% static 'image/b.jpg' %}" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
             <h2>Title: Book 5</h2>
             <p>Author: Author 5</p>
             <p>Genre: Non-fiction</p>
