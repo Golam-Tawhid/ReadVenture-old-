@@ -68,10 +68,11 @@ addBook("Book 4", "Author 4", "Mystery", "Thriller", "German", "6543210987", "bo
     </header>
     <section class="lower" style="background-image: url(/static/images/booklist.jpg);">
         <div>
-            <button>Add Books</button>
+            <a href="{% url 'addbooks' %}">
+                <button>Add Books</button>
+            </a>
             <button>Remove Books</button>
         </div>
-
 
         <!-- Book 1 -->
         <div class="book">
