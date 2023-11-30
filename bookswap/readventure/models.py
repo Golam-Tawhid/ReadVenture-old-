@@ -47,6 +47,8 @@ class Books(models.Model):
     language = models.CharField(max_length=30, default='N/A')
     #conditon = models.CharField(max_length=30, default='N/A')
     user = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
+    admin= models.BooleanField(default=False)
+    regular= models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
