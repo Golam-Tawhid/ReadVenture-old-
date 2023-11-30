@@ -46,8 +46,7 @@ class Books(models.Model):
     #owner_id = models.CharField(max_length=20, default='N/A')
     language = models.CharField(max_length=30, default='N/A')
     #conditon = models.CharField(max_length=30, default='N/A')
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
 
     def __str__(self):
         return self.title
