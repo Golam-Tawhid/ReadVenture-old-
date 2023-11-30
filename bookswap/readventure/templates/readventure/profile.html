@@ -4,95 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Edit</title>
-    <link rel="stylesheet" href="{% static 'css/profiledown.css' %}">
-    <style>
-        /* Additional styles for the top bar */
-        .top-bar {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .top-bar-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .top-bar-right {
-            display: flex;
-            align-items: center;
-        }
-
-        .top-bar a {
-            color: #fff;
-            margin: 0 10px;
-            text-decoration: none;
-        }
-
-        .container {
-            padding-top: 50px; /* Adjust based on your top bar height */
-        }
-    </style>
-</head>
-<body>
-    <div class="top-bar">
-        <div class="top-bar-left">
-            <span>ReadVenture</span>
-        </div>
-        <div class="top-bar-right">
-            <a href="{% url 'home' %}">HOME</a>
-            <a href="{% url 'home' %}">BOOKLIST</a>
-            <a href="#reviews">WISHLIST</a>
-            <a href="#blog">BORROWED LIST</a>
-            <!-- <a href="#contact">PREFERENCES</a> -->
-        </div>
-    </div>
-
-    <div class="container" style="background-color: rgb(0, 234, 255);"> 
-        <div class="card"> 
-            <div class="info"> 
-                <span>Profile Info</span> 
-                <button id="savebutton">edit</button> 
-            </div> 
-            <div class="forms"> 
-                <div class="inputs">
-                    <span>First Name</span>
-                    <input type="text" readonly value="{{ user.first_name }}">
-                </div>
-                <div class="inputs">
-                    <span>Last Name</span>
-                    <input type="text" readonly value="{{ user.last_name }}">
-                </div>
-                <div class="inputs">
-                    <span>Email</span>
-                    <input type="email" readonly value="{{ user.email }}">
-                </div>
-                <div class="inputs">
-                    <span>Student ID</span>
-                    <input type="text" readonly value="{{ user.student_id }}">
-                </div>
-                <div class="inputs">
-                    <span>Contact No.</span>
-                    <input type="text" readonly value="{{ user.contact_no }}">
-                </div>
-            </div> 
-        </div>
-    </div>
-
+    <title>MY PROFILE</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var savebutton = document.getElementById('savebutton');
             var readonly = true;
-            var inputs = document.querySelectorAll('input[type="text"]');
-            
+            var inputs = document.querySelectorAll('.forms input[type="text"]');
+            var profilePictureInput = document.getElementById('profilePictureInput');
+            var profilePicture = document.getElementById('profilePicture');
+
             savebutton.addEventListener('click', function () {
                 for (var i = 0; i < inputs.length; i++) {
                     inputs[i].toggleAttribute('readonly');
                 }
+
+                // Toggle the disabled attribute for the profile picture input
+                profilePictureInput.toggleAttribute('disabled');
 
                 if (savebutton.innerHTML == "edit") {
                     savebutton.innerHTML = "save";
@@ -100,7 +28,76 @@
                     savebutton.innerHTML = "edit";
                 }
             });
+
+            // Handle profile picture change
+            profilePictureInput.addEventListener('change', function (event) {
+                var file = event.target.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        profilePicture.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
         });
+
     </script>
+</head>
+<body>
+    <header>
+        <nav><a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a></nav>
+        <nav>
+            <a href="{% url 'home' %}">HOME</a>
+            <a href="{% url 'mybooks' %}">MY BOOKS</a>
+            <a href="#wishlist">WISHLIST</a>
+            <a href="#borrowedbooks">BORROWED</a>
+            <a href="{% url 'profile' %}" style="margin-right: 20px; color: rgb(217, 196, 255);">PROFILE</a>
+        </nav>
+    </header>
+
+    <div class="container" style="background-image: url('{% static 'images/home.jpg' %}');">
+        <div class="card">
+            <div class="info">
+                <span>Profile Info</span>
+                <button id="savebutton">edit</button>
+            </div>
+            <div class="content">
+                <div class="forms">
+                    <!-- Existing form inputs go here -->
+                    <div class="inputs"> 
+                        <span>First Name</span> 
+                        <input type="text" readonly value="John"> 
+                    </div> 
+                    <div class="inputs"> 
+                        <span>Last Name</span> 
+                        <input type="text" readonly value="Doe"> 
+                    </div> 
+                    <div class="inputs"> 
+                        <span>Email</span> 
+                        <input type="text" readonly value="john.doe12@gmail.com"> 
+                    </div> 
+                    <div class="inputs"> 
+                        <span>Student ID</span> 
+                        <input type="text" readonly value="johndoe12"> 
+                    </div> 
+                    <div class="inputs"> 
+                        <span>Contact No.</span> 
+                        <input type="text" readonly value="United States"> 
+                    </div> 
+                </div>
+                <div class="image-container">
+                    <div class="inputs">
+                        <span>Profile Picture</span>
+                        <img id="profilePicture" src="{% static 'image/profile.jpg' %}" alt="Profile Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+                        <div id="profilePictureInput" class="file-input-container">
+                            <input type="file" id="fileInput" accept="image/*" class="file-input" />
+                            <label for="fileInput" class="file-label">Upload Photo</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
