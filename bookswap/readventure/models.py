@@ -47,8 +47,10 @@ class Books(models.Model):
     language = models.CharField(max_length=30, default='N/A')
     #conditon = models.CharField(max_length=30, default='N/A')
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     def __str__(self):
-        return self.book_id
+        return self.title
     
 
 class Receipt(models.Model):

@@ -1,6 +1,7 @@
 from django.urls import path
-
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.sign_in, name='sign_in'),
@@ -12,4 +13,4 @@ urlpatterns = [
     path('wishlist/', views.wishlist, name='wishlist'),
     path('borrowed/', views.borrowed, name='borrowed'),
     path('addbooks/', views.addbooks, name='addbooks'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

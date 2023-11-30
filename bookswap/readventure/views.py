@@ -91,19 +91,11 @@ def addbooks(request):
     if request.method == 'POST':
         form = Addbooksform(request.POST, request.FILES)
         if form.is_valid():
-            #book = form.save(commit=False)
-            #book.user = request.user 
-            #book.save()
-            form.save(user=request.user)
-            return redirect('mybooks')
-        
-            
+            book = form.save(commit=False)
+            book.user = request.user 
+            book.save()
+            return redirect('mybooks')           
     else:
         form = Addbooksform()
     
-    return render(request, 'readventure/mybooks.html', {'form': form})
-
-    
-
-
-
+    return render(request, 'readventure/addbooks.html', {'form': form})

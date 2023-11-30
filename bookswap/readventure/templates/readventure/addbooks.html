@@ -66,6 +66,7 @@
             <div class="content">
                 <form method="post" action="{% url 'addbooks' %}" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <input type="hidden" name="user" value="{{ user.id }}">
                     <div class="forms">
                         <div class="inputs">
                             <span>Title</span>
@@ -73,7 +74,7 @@
                         </div>
                         <div class="inputs">
                             <span>Author <i style="font-size: 12px; color: rgb(30, 0, 161);">*Use "," to separate multiple Authors</i></span>
-                            {{ form.authors }}
+                            {{ form.author }}
                         </div>
                         <div class="inputs">
                             <span>ISBN</span>
@@ -95,7 +96,7 @@
                     <div class="image-container">
                         <div class="inputs">
                             <span>Cover Photo</span>
-                            {{ form.cover_photo }}
+                            {{ form.cover_image }}
                         </div>
                     </div>
                     <button type="submit">Save</button>
