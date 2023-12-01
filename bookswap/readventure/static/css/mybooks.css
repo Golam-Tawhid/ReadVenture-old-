@@ -46,6 +46,11 @@ h1 {
     padding-top: 100px;
     padding-left: 30px;
     padding-right: 30px;
+    height: 100vh; /* Set body height to 100% of the viewport height */
+    background-image: url(/static/images/booklist.jpg);
+    background-size: cover;
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat;
 }
 
 
