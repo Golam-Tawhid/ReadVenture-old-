@@ -11,13 +11,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #eeeeee;
+  background-color: #eee;
 }
 
 .card {
-  width: 700px; /* Increased width to accommodate both forms and image side by side */
-  height: 570px;
-  background-color: #ffffff8f;
+  width: 350px;
+  height: 470px;
+  background-color: #fff;
   box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
@@ -42,14 +42,8 @@
   text-transform: uppercase;
 }
 
-.card .content {
-  display: flex;
-}
-
 .card .forms {
-  padding: 0px;
-  padding-left: 20px;
-  flex: 1; /* Take up remaining space */
+  padding: 15px;
 }
 
 .card .inputs {
@@ -59,9 +53,7 @@
 }
 
 .card .inputs span {
-  font-size: 18px;
-  font-style: bold;
-  
+  font-size: 12px;
 }
 
 .card .inputs input {
@@ -70,106 +62,8 @@
   font-size: 17px;
   box-shadow: none;
   outline: none;
-  margin-top: 8px;
-  margin-bottom: 8px;
 }
 
 .card .inputs input[type="text"][readonly] {
-  border: 2px solid rgba(255, 255, 255, 0.76);
-}
-
-.card .image-container {
-  padding: 15px;
-  width: 200px; /* Adjust width as needed */
-}
-
-.card .inputs #profilePictureInput {
-  margin-bottom: 10px;
-}
-
-.card .inputs #profilePicture {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-/* Additional styles for the top bar */
-header {
-    position: fixed; /* Make the header fixed */
-    top: 0;
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 0px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav {
-    background-color: #333;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: flex-end; /* Align items to the right */
-    align-items: center;
-}
-
-nav a {
-    text-decoration: none;
-    color: white;
-    padding: 9px;
-    margin: 0 10px;
-    transition: color 0.3s;
-    font-size: 18px;
-}
-
-nav a:hover {
-    color: #4CAF50;
-}
-
-.brand {
-    font-weight: bold;
-}
-
-.container {
-    padding-top: 60px; /* Adjust based on your top bar height */
-    background-size: cover;
-    background-position: center;
-
-}
-.card .inputs #profilePictureInput {
-  margin-bottom: 10px;
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-}
-
-.card .inputs #profilePictureInput input[type=file] {
-  font-size: 100px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  cursor: pointer;
-  
-}
-
-.card .inputs #profilePictureInput label {
-  display: inline-block;
-  padding: 15px 30px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
-  background-color: #4CAF50;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-  text-align: center;
-  margin-top: 20px; 
-  margin-left: 15px;
-}
-
-.card .inputs #profilePictureInput label:hover {
-  background-color: #45a049;
+  border: 2px solid rgba(0, 0, 0, 0);
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MY PROFILE</title>
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="icon" href="{% static 'icon/favicon.ico' %}">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var savebutton = document.getElementById('savebutton');
@@ -19,8 +19,6 @@
                 for (var i = 0; i < inputs.length; i++) {
                     inputs[i].toggleAttribute('readonly');
                 }
-
-                // Toggle the disabled attribute for the profile picture input
                 profilePictureInput.toggleAttribute('disabled');
 
                 if (savebutton.innerHTML == "edit") {
@@ -29,8 +27,6 @@
                     savebutton.innerHTML = "edit";
                 }
             });
-
-            // Handle profile picture change
             profilePictureInput.addEventListener('change', function (event) {
                 var file = event.target.files[0];
                 if (file) {
