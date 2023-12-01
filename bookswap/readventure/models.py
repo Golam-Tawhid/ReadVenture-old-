@@ -2,60 +2,49 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, password=None, **extra_fields):
-        user = self.model(username=username, **extra_fields)
+    def create_user(self, student_id, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(student_id=student_id, email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
-
-    def create_superuser(self, username, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-
-        return self.create_user(username, password, **extra_fields)
-
 class User(AbstractBaseUser, PermissionsMixin):
-    # Add the additional fields
+    student_id = models.CharField(max_length=20, unique=True, primary_key=True)
     first_name = models.CharField(max_length=30, default='N/A')
     last_name = models.CharField(max_length=30, default='N/A')
-    student_id = models.CharField(max_length=20, unique=True, default='N/A')
     email = models.EmailField(unique=True)
     contact_no = models.CharField(max_length=15, default='N/A')
     admin= models.BooleanField(default=False)
     regular= models.BooleanField(default=True)
-    
-    # username = models.CharField(max_length=30, unique=True, default='N/A')
-    # is_active = models.BooleanField(default=True)
-    # is_staff = models.BooleanField(default=False)
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'student_id'
-    # REQUIRED_FIELDS = ['first_name', 'last_name', 'student_id', 'email', 'contact_no']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'contact_no']
 
     def __str__(self):
         return self.student_id
     
 class Books(models.Model):
-    # Add the additional fields
     title = models.CharField(max_length=100, default='N/A')
     author = models.CharField(max_length=30, default='N/A')
     isbn = models.CharField(max_length=20, unique=True, default='N/A')
     genre = models.CharField(max_length=30, default='N/A')
     category = models.CharField(max_length=30, default='N/A')
     cover_photo = models.ImageField(upload_to='images/', default='images/default.jpg')
-    #book_id = models.CharField(max_length=20, unique=True, default='N/A')
-    #owner_id = models.CharField(max_length=20, default='N/A')
+    book_id = models.CharField(max_length=20, unique=True, default='N/A', primary_key=True)
+    owner_id = models.CharField(max_length=20, default='N/A')
     language = models.CharField(max_length=30, default='N/A')
-    #conditon = models.CharField(max_length=30, default='N/A')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
+    condition = models.CharField(max_length=30, default='N/A')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id', related_name='books')
 
     def __str__(self):
         return self.title
     
-
 class Receipt(models.Model):
-    # Add the additional fields
     recept_no = models.CharField(max_length=20, unique=True, default='N/A')
     book_id = models.CharField(max_length=20, default='N/A')
     borrower_id = models.CharField(max_length=20, default='N/A')

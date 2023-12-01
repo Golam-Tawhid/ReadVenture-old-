@@ -3,67 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MY PROFILE</title>
-    <link rel="stylesheet" href="css/profiledown.css">
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var savebutton = document.getElementById('savebutton');
-            var readonly = true;
-            var inputs = document.querySelectorAll('.forms input[type="text"]');
-            var profilePictureInput = document.getElementById('profilePictureInput');
-            var profilePicture = document.getElementById('profilePicture');
+    <title>Profile Edit</title>
+    <link rel="stylesheet" href="profiledown.css">
+    <style>
+        /* Additional styles for the top bar */
+        header {
+            position: fixed; /* Make the header fixed */
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-            savebutton.addEventListener('click', function () {
-                for (var i = 0; i < inputs.length; i++) {
-                    inputs[i].toggleAttribute('readonly');
-                }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: flex-end; /* Align items to the right */
+            align-items: center;
+        }
 
-                // Toggle the disabled attribute for the profile picture input
-                profilePictureInput.toggleAttribute('disabled');
+        nav a {
+            text-decoration: none;
+            color: white;
+            padding: 15px;
+            margin: 0 10px;
+            transition: color 0.3s;
+            font-size: 18px;
+        }
 
-                if (savebutton.innerHTML == "edit") {
-                    savebutton.innerHTML = "save";
-                } else {
-                    savebutton.innerHTML = "edit";
-                }
-            });
+        nav a:hover {
+            color: #4CAF50;
+        }
 
-            // Handle profile picture change
-            profilePictureInput.addEventListener('change', function (event) {
-                var file = event.target.files[0];
-                if (file) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        profilePicture.src = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        });
+        .brand {
+            font-weight: bold;
+        }
 
-    </script>
+        .container {
+            padding-top: 50px; /* Adjust based on your top bar height */
+            background-image: url(home.jpg);
+            background-size: cover;
+            background-position: center;
+
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav><a href="homee.html" style="font-size: 32px;">ReadVenture</a></nav>
+        <div class="brand">ReadVenture</div>
         <nav>
-            <a href="homee.html">HOME</a>
-            <a href="mybooks.html">MY BOOKS</a>
-            <a href="#wishlist">WISHLIST</a>
-            <a href="#borrowedbooks">BORROWED</a>
-            <a href="profile-edit.html " style="margin-right: 20px; color: rgb(217, 196, 255);">PROFILE</a>
+            <a href="homee.html">Home</a>
+            <a href="#mybooks">My Books</a>
+            <a href="#wishlist">Wishlist</a>
+            <a href="#borrowedbooks">Borrowed Books</a>
+            <a href="profile-edit.html">Profile</a>
         </nav>
     </header>
 
-    <div class="container" style="background-image: url(image/home.jpg)">
-        <div class="card">
-            <div class="info">
-                <span>Profile Info</span>
-                <button id="savebutton">edit</button>
+    <div class="container"> 
+        <div class="card"> 
+            <div>
+                
             </div>
-            <div class="content">
-                <div class="forms">
-                    <!-- Existing form inputs go here -->
+            <div>
+                <div class="info"> 
+                    <span>Profile Info</span> 
+                    <button id="savebutton">edit</button> 
+                </div> 
+                <div class="forms"> 
                     <div class="inputs"> 
                         <span>First Name</span> 
                         <input type="text" readonly value="John"> 
@@ -74,7 +87,7 @@
                     </div> 
                     <div class="inputs"> 
                         <span>Email</span> 
-                        <input type="text" readonly value="john.doe12@gmail.com"> 
+                        <input type="email" readonly value="john.doe12@gmail.com"> 
                     </div> 
                     <div class="inputs"> 
                         <span>Student ID</span> 
@@ -84,21 +97,29 @@
                         <span>Contact No.</span> 
                         <input type="text" readonly value="United States"> 
                     </div> 
-                </div>
-                <div class="image-container">
-                    <div class="inputs">
-                        <span>Profile Picture</span>
-                        <img id="profilePicture" src="image/profile.jpg" alt="Profile Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
-                        <div id="profilePictureInput" class="file-input-container">
-                            <input type="file" id="fileInput" accept="image/*" class="file-input" />
-                            <label for="fileInput" class="file-label">Upload Photo</label>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
+                </div> 
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var savebutton = document.getElementById('savebutton');
+            var readonly = true;
+            var inputs = document.querySelectorAll('input[type="text"]');
+            
+            savebutton.addEventListener('click', function () {
+                for (var i = 0; i < inputs.length; i++) {
+                    inputs[i].toggleAttribute('readonly');
+                }
+
+                if (savebutton.innerHTML == "edit") {
+                    savebutton.innerHTML = "save";
+                } else {
+                    savebutton.innerHTML = "edit";
+                }
+            });
+        });
+    </script>
 </body>
 </html>

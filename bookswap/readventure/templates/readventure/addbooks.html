@@ -7,47 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Books</title>
     <link rel="stylesheet" href="{% static 'css/addbooks.css' %}">
-    <script>
-        // document.addEventListener('DOMContentLoaded', function () {
-        //     var savebutton = document.getElementById('savebutton');
-        //     var readonly = true;
-        //     var inputs = document.querySelectorAll('.forms input[type="text"]');
-        //     var profilePictureInput = document.getElementById('profilePictureInput');
-        //     var profilePicture = document.getElementById('profilePicture');
-
-        //     savebutton.addEventListener('click', function () {
-        //         for (var i = 0; i < inputs.length; i++) {
-        //             inputs[i].toggleAttribute('readonly');
-        //         }
-
-        //         // Toggle the disabled attribute for the profile picture input
-        //         profilePictureInput.toggleAttribute('disabled');
-
-        //         if (savebutton.innerHTML == "edit") {
-        //             savebutton.innerHTML = "save";
-        //         } else {
-        //             savebutton.innerHTML = "edit";
-        //         }
-        //     });
-
-            // Handle profile picture change
-            profilePictureInput.addEventListener('change', function (event) {
-                var file = event.target.files[0];
-                if (file) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        profilePicture.src = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        // });
-
-    </script>
 </head>
 <body>
     <header>
-        <nav><a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a></nav>
+        <nav>
+            <a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a>
+        </nav>
         <nav>
             <a href="{% url 'home' %}" style="color: rgb(217, 196, 255);">HOME</a>
             <a href="{% url 'mybooks' %}">MY BOOKS</a>
@@ -57,15 +22,15 @@
         </nav>
     </header>
 
-    <div class="container" style="background-image: url(image/home.jpg);background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
+    <div class="container" style="background-image: url(/static/images/home.jpg);background-size: cover; background-repeat: no-repeat; background-attachment: fixed;">
         <div class="card">
             <div class="info">
                 <span>Enter Book Info:</span>
-                <!-- <button id="savebutton">edit</button> -->
             </div>
             <div class="content">
                 <form method="post" action="{% url 'addbooks' %}" enctype="multipart/form-data">
                     {% csrf_token %}
+                    {{ form.as_p }}
                     <label for="title">Title:</label>
                     <input type="text" id="title" name="title" required>
             
@@ -86,7 +51,9 @@
             
                     <label for="language">Language:</label>
                     <input type="text" id="language" name="language" required>
-            
+
+                    <label for="language">Condition:</label>
+                    <input type="text" id="condition" name="condition" required>
                     <!-- Add other fields as needed -->
             
                     <button type="submit">Save</button>
