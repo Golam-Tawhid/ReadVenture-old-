@@ -86,7 +86,11 @@
                 <div class="image-container">
                     <div class="inputs">
                         <span>Profile Picture</span>
-                        <img id="profilePicture" src="{% static 'image/profile.jpg' %}" alt="Profile Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+                        {% if user.profile_picture %}
+                            <img id="profilePicture" src="{{ user.profile_picture.url }}" alt="Profile Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+                        {% else %}
+                            <img id="profilePicture" src="{% static 'images/dprofile.jpg' %}" alt="Default Profile Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+                        {% endif %}
                         <div id="profilePictureInput" class="file-input-container">
                             <input type="file" id="fileInput" accept="image/*" class="file-input" />
                             <label for="fileInput" class="file-label">Upload Photo</label>
