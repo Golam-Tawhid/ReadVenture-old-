@@ -22,69 +22,23 @@
         </nav>
     </header>
     <section class="lower" style="background-image: url(/static/images/wishlist.jpg);">
-        <div>
-            
-        </div>
+       
 
-
-        <!-- Book 1 -->
-        <div class="book">
-            <img src="{% static 'image/b.jpg' %}" alt="Book 1 Cover"> <!-- Update the path to use forward slashes -->
-            <h2>Title: Book 1</h2>
-            <p>Author: Author 1</p>
-            <p>Genre: Fiction</p>
-            <p>Category: Mystery</p>
-            <p>Language: English</p>
-            <p>ISBN: 1234567890</p>
+        <!-- Display user's books -->
+        <div id="bookContainer">
+            {% for book in user_books %}
+                <div class="book">
+                    <img src="{{ book.cover_photo.url }}" alt="{{ book.title }} Cover">
+                    <h2>Title: {{ book.title }}</h2>
+                    <p>Author: {{ book.author }}</p>
+                    <p>Genre: {{ book.genre }}</p>
+                    <p>Category: {{ book.category }}</p>
+                    <p>Language: {{ book.language }}</p>
+                    <p>ISBN: {{ book.isbn }}</p>
+                </div>
+            {% endfor %}
         </div>
-
-        <!-- Book 2 -->
-        <div class="book">
-            <img src="{% static 'image/b.jpg' %}" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
-            <h2>Title: Book 2</h2>
-            <p>Author: Author 2</p>
-            <p>Genre: Non-fiction</p>
-            <p>Category: History</p>
-            <p>Language: Spanish</p>
-            <p>ISBN: 0987654321</p>
-        </div>
-        <!-- Book 3 -->
-        <div class="book">
-            <img src="{% static 'image/b.jpg' %}" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
-            <h2>Title: Book 3</h2>
-            <p>Author: Author 2</p>
-            <p>Genre: Non-fiction</p>
-            <p>Category: History</p>
-            <p>Language: Spanish</p>
-            <p>ISBN: 0987654321</p>
-        </div>
-        <!-- Book 4 -->
-        <div class="book">
-            <img src="{% static 'image/b.jpg' %}" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
-            <h2>Title: Book 4</h2>
-            <p>Author: Author 4</p>
-            <p>Genre: Non-fiction</p>
-            <p>Category: History</p>
-            <p>Language: Spanish</p>
-            <p>ISBN: 0987654321</p>
-        </div>
-
-        <div class="book">
-            <img src="{% static 'image/b.jpg' %}" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
-            <h2>Title: Book 5</h2>
-            <p>Author: Author 5</p>
-            <p>Genre: Non-fiction</p>
-            <p>Category: History</p>
-            <p>Language: Spanish</p>
-            <p>ISBN: 0987654321</p>
-        </div>
-
-        <!-- Add more book entries as needed -->
     </section>
 
-    
-
 </body>
-
-
 </html>
