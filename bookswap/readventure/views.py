@@ -14,19 +14,17 @@ def sign_in(request):
         if user is not None:
             login(request, user)
             request.session['login_success'] = True
-            return redirect('home')  # Redirect to the home page
+            return redirect('home')
         else:
-            # Handle invalid login credentials
             return render(request, 'readventure/sign_in.html', {'error_message': 'Invalid login credentials'})
         
     return render(request, 'readventure/sign_in.html')
 
 def home(request):
     if request.session.get('login_success'):
-        # del request.session['login_success']  # Remove the session variable to avoid showing the message on page refresh
+        # del request.session['login_success']
         return render(request, 'readventure/home.html')
     else:
-        # Redirect to the login page if there's no successful login session
         return redirect('sign_in')
 
 def signup(request):
@@ -41,6 +39,24 @@ def signup(request):
         form = SignUpForm()
     
     return render(request, 'readventure/sign_up.html', {'form': form})
+
+@login_required
+def addbooks(request):
+    if request.method == 'POST':
+        form = Addbooksform(request.POST, request.FILES)
+        if form.is_valid():
+            print("Form is valid")
+            book = form.save(commit=False)
+            book.owner = request.user 
+            book.save()
+            return redirect('mybooks')
+        else:
+            print("Form is not valid")
+            print(form.errors)           
+    else:
+        form = Addbooksform()
+    
+    return render(request, 'readventure/addbooks.html', {'form': form})
 
 def sign_up(request):
     return render(request, 'readventure/sign_up.html')
@@ -61,41 +77,13 @@ def mybooks(request):
     return render(request, 'readventure/mybooks.html', context)
 
 def wishlist(request):
-    # Assuming you want to render a template called 'wishlist.html'
-    # You can pass any necessary context data to this template
     context = {
-        'books': Books.objects.all(),  # Assuming Book is a model representing books
-        # Other context data...
+        'books': Books.objects.all(),
     }
     return render(request, 'readventure/wishlist.html', context)
 
 def borrowed(request):
-    # Assuming you want to render a template called 'borrowed.html'
-    # You can pass any necessary context data to this template
     context = {
-        'books': Books.objects.all(),  # Assuming Book is a model representing books
-        # Other context data...
+        'books': Books.objects.all(),
     }
     return render(request, 'readventure/borrowed.html', context)
-
-#def addbooks(request):
-    # Assuming you want to render a template called 'add_books.html'
-    # You can pass any necessary context data to this template
-    #context = {
-        #'books': Books.objects.all(),  # Assuming Book is a model representing books
-        # Other context data...
-    #}
-    #return render(request, 'readventure/addbooks.html', context)
-@login_required
-def addbooks(request):
-    if request.method == 'POST':
-        form = Addbooksform(request.POST, request.FILES)
-        if form.is_valid():
-            book = form.save(commit=False)
-            book.user = request.user 
-            book.save()
-            return redirect('mybooks')           
-    else:
-        form = Addbooksform()
-    
-    return render(request, 'readventure/addbooks.html', {'form': form})

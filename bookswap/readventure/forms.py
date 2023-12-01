@@ -17,4 +17,4 @@ class SignUpForm(UserCreationForm):
 class Addbooksform(forms.ModelForm):
     class Meta:
         model = Books
-        fields = ['owner', 'title', 'author', 'isbn', 'genre', 'category', 'cover_photo', 'language', 'condition']
+        fields = ['title', 'author', 'isbn', 'genre', 'category', 'cover_photo', 'language', 'condition']
