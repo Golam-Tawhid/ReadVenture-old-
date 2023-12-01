@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MY PROFILE</title>
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var savebutton = document.getElementById('savebutton');
@@ -50,8 +51,8 @@
         <nav>
             <a href="{% url 'home' %}">HOME</a>
             <a href="{% url 'mybooks' %}">MY BOOKS</a>
-            <a href="#wishlist">WISHLIST</a>
-            <a href="#borrowedbooks">BORROWED</a>
+            <a href="{% url 'wishlist' %}">WISHLIST</a>
+            <a href="{% url 'borrowed' %}">BORROWED</a>
             <a href="{% url 'profile' %}" style="margin-right: 20px; color: rgb(217, 196, 255);">PROFILE</a>
         </nav>
     </header>
