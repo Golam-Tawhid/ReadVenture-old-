@@ -68,13 +68,8 @@ def profile(request):
     return render(request, 'readventure/profile.html', context)
 
 def mybooks(request):
-    # Assuming you want to render a template called 'my_books.html'
-    # You can pass any necessary context data to this template
-    context = {
-        'books': Books.objects.all(),  # Assuming Book is a model representing books
-        # Other context data...
-    }
-    return render(request, 'readventure/mybooks.html', context)
+    user_books = Books.objects.filter(owner=request.user)
+    return render(request, 'readventure/mybooks.html', {'user_books': user_books})
 
 def wishlist(request):
     context = {

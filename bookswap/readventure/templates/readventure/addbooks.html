@@ -94,7 +94,7 @@
             <div class="image-holder">
                 <img src="{% static 'images/img1.jpg' %}" alt="">
             </div>
-            <form method="post" action="{% url 'addbooks' %}">
+            <form method="post" action="{% url 'addbooks' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="title">Book Title</label>

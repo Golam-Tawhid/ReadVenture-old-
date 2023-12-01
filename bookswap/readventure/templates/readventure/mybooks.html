@@ -7,59 +7,13 @@
     <title>MY Books</title>
     <link rel="stylesheet" href="{% static 'css/mybooks.css' %}">
     <link rel="icon" href="{% static 'images/favicon.ico' %}">
-    <script>
-    function addBook(title, author, genre, category, language, isbn, coverImage) {
-    var bookContainer = document.getElementById('bookContainer');
-
-    var bookDiv = document.createElement('div');
-    bookDiv.className = 'book';
-
-    var img = document.createElement('img');
-    img.src = coverImage;
-    img.alt = title + ' Cover';
-
-    var h2 = document.createElement('h2');
-    h2.textContent = 'Title: ' + title;
-
-    var authorP = document.createElement('p');
-    authorP.textContent = 'Author: ' + author;
-
-    var genreP = document.createElement('p');
-    genreP.textContent = 'Genre: ' + genre;
-
-    var categoryP = document.createElement('p');
-    categoryP.textContent = 'Category: ' + category;
-
-    var languageP = document.createElement('p');
-    languageP.textContent = 'Language: ' + language;
-
-    var isbnP = document.createElement('p');
-    isbnP.textContent = 'ISBN: ' + isbn;
-
-    bookDiv.appendChild(img);
-    bookDiv.appendChild(h2);
-    bookDiv.appendChild(authorP);
-    bookDiv.appendChild(genreP);
-    bookDiv.appendChild(categoryP);
-    bookDiv.appendChild(languageP);
-    bookDiv.appendChild(isbnP);
-
-    bookContainer.appendChild(bookDiv);
-}
-
-// Example usage
-addBook("Book 1", "Author 1", "Fiction", "Mystery", "English", "1234567890", "image/roger-ce-dq5pMr51upo-unsplash.jpg");
-addBook("Book 2", "Author 2", "Non-fiction", "History", "Spanish", "0987654321", "image/roger-ce-dq5pMr51upo-unsplash.jpg");
-addBook("Book 3", "Author 3", "Science Fiction", "Adventure", "French", "9876543210", "book3.jpg");
-addBook("Book 4", "Author 4", "Mystery", "Thriller", "German", "6543210987", "book4.jpg");
-
-    </script>
 </head>
 <body>
 
     <header>
         <nav><a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a></nav>
         <nav>
+            
             <a href="{% url 'home' %}">HOME</a>
             <a href="{% url 'mybooks' %}" style="color: rgb(217, 196, 255);">MY BOOKS</a>
             <a href="{% url 'wishlist' %}">WISHLIST</a>
@@ -75,64 +29,21 @@ addBook("Book 4", "Author 4", "Mystery", "Thriller", "German", "6543210987", "bo
             <button>Remove Books</button>
         </div>
 
-        <!-- Book 1 -->
-        <div class="book">
-            <img src="image\roger-ce-dq5pMr51upo-unsplash.jpg" alt="Book 1 Cover"> <!-- Update the path to use forward slashes -->
-            <h2>Title: Book 1</h2>
-            <p>Author: Author 1</p>
-            <p>Genre: Fiction</p>
-            <p>Category: Mystery</p>
-            <p>Language: English</p>
-            <p>ISBN: 1234567890</p>
+        <!-- Display user's books -->
+        <div id="bookContainer">
+            {% for book in user_books %}
+                <div class="book">
+                    <img src="{{ book.cover_photo.url }}" alt="{{ book.title }} Cover">
+                    <h2>Title: {{ book.title }}</h2>
+                    <p>Author: {{ book.author }}</p>
+                    <p>Genre: {{ book.genre }}</p>
+                    <p>Category: {{ book.category }}</p>
+                    <p>Language: {{ book.language }}</p>
+                    <p>ISBN: {{ book.isbn }}</p>
+                </div>
+            {% endfor %}
         </div>
-
-        <!-- Book 2 -->
-        <div class="book">
-            <img src="image\roger-ce-dq5pMr51upo-unsplash.jpg" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
-            <h2>Title: Book 2</h2>
-            <p>Author: Author 2</p>
-            <p>Genre: Non-fiction</p>
-            <p>Category: History</p>
-            <p>Language: Spanish</p>
-            <p>ISBN: 0987654321</p>
-        </div>
-        <!-- Book 3 -->
-        <div class="book">
-            <img src="image\roger-ce-dq5pMr51upo-unsplash.jpg" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
-            <h2>Title: Book 3</h2>
-            <p>Author: Author 2</p>
-            <p>Genre: Non-fiction</p>
-            <p>Category: History</p>
-            <p>Language: Spanish</p>
-            <p>ISBN: 0987654321</p>
-        </div>
-        <!-- Book 4 -->
-        <div class="book">
-            <img src="image\roger-ce-dq5pMr51upo-unsplash.jpg" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
-            <h2>Title: Book 4</h2>
-            <p>Author: Author 4</p>
-            <p>Genre: Non-fiction</p>
-            <p>Category: History</p>
-            <p>Language: Spanish</p>
-            <p>ISBN: 0987654321</p>
-        </div>
-
-        <div class="book">
-            <img src="image\roger-ce-dq5pMr51upo-unsplash.jpg" alt="Book 2 Cover"> <!-- Update the path to the cover image of Book 2 -->
-            <h2>Title: Book 5</h2>
-            <p>Author: Author 5</p>
-            <p>Genre: Non-fiction</p>
-            <p>Category: History</p>
-            <p>Language: Spanish</p>
-            <p>ISBN: 0987654321</p>
-        </div>
-
-        <!-- Add more book entries as needed -->
     </section>
 
-    
-
 </body>
-
-
 </html>
