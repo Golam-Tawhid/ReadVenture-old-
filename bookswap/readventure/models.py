@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth import get_user_model
+import uuid
 
 class UserManager(BaseUserManager):
     def create_user(self, student_id, email, password=None, **extra_fields):
@@ -29,25 +31,28 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.student_id
     
 class Books(models.Model):
+    book_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
     title = models.CharField(max_length=100, default='N/A')
     author = models.CharField(max_length=30, default='N/A')
     isbn = models.CharField(max_length=20, unique=True, default='N/A')
     genre = models.CharField(max_length=30, default='N/A')
     category = models.CharField(max_length=30, default='N/A')
     cover_photo = models.ImageField(upload_to='images/', default='images/default.jpg')
-    book_id = models.CharField(max_length=20, unique=True, default='N/A', primary_key=True)
-    owner_id = models.CharField(max_length=20, default='N/A')
     language = models.CharField(max_length=30, default='N/A')
     condition = models.CharField(max_length=30, default='N/A')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id', related_name='books')
 
     def __str__(self):
         return self.title
     
 class Receipt(models.Model):
-    recept_no = models.CharField(max_length=20, unique=True, default='N/A')
-    book_id = models.CharField(max_length=20, default='N/A')
-    borrower_id = models.CharField(max_length=20, default='N/A')
-    due_date = models.DateField(auto_now=False, auto_now_add=False, default='N/A')
-    return_date = models.DateField(auto_now=False, auto_now_add=False, default='N/A')
-    
+    receipt_no = models.AutoField(primary_key=True)
+    book = models.ForeignKey(Books, on_delete=models.CASCADE)
+    borrower = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    rating = models.IntegerField(default=0)
+    review = models.TextField(blank=True)
+    due_date = models.DateField(default='N/A')
+    return_date = models.DateField(default='N/A')
+
+    def __str__(self):
+        return str(self.receipt_no)
