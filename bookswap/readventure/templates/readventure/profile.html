@@ -89,7 +89,7 @@
                         {% if user.profile_picture %}
                             <img id="profilePicture" src="{{ user.profile_picture.url }}" alt="Profile Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
                         {% else %}
-                            <img id="profilePicture" src="{% static 'images/dprofile.jpg' %}" alt="Default Profile Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+                            <img id="profilePicture" src="{% static 'images/profile.jpg' %}" alt="Default Profile Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
                         {% endif %}
                         <div id="profilePictureInput" class="file-input-container">
                             <input type="file" id="fileInput" accept="image/*" class="file-input" />
