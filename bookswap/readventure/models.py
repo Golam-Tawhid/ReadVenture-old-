@@ -31,7 +31,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.student_id
     
 class Books(models.Model):
-    book_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    book_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
     title = models.CharField(max_length=100, default='N/A')
     author = models.CharField(max_length=30, default='N/A')
@@ -50,9 +50,99 @@ class Receipt(models.Model):
     book = models.ForeignKey(Books, on_delete=models.CASCADE)
     borrower = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     rating = models.IntegerField(default=0)
-    review = models.TextField(blank=True)
+    review = models.TextField(blank=True,max_length=100)
     due_date = models.DateField(default='N/A')
     return_date = models.DateField(default='N/A')
 
     def __str__(self):
         return str(self.receipt_no)
+
+class Wishlist(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
+    wishlist = models.CharField(max_length=30, default='N/A')
+
+    class Meta:
+        unique_together = ('student', 'wishlist')
+
+    def __str__(self):
+        return f'{self.student} - {self.wishlist}'
+
+class Booklist(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
+    booklist = models.CharField(max_length=30, default='N/A')
+
+    class Meta:
+        unique_together = ('student', 'booklist')
+
+    def __str__(self):
+        return f'{self.student} - {self.booklist}'
+
+# class Author(models.Model):
+#     author = models.CharField(max_length=30, default='N/A')
+#     book= models.ForeignKey(Books, on_delete=models.CASCADE, to_field='book_id',related_name='authors')
+
+#     class Meta:
+#         unique_together = ('author', 'book')
+
+#     def __str__(self):
+#         return f'{self.author} - {self.book}'
+
+
+# class Availability(models.Model):
+#     book = models.OneToOneField(Books, on_delete=models.CASCADE, primary_key=True)
+#     status = models.CharField(max_length=30, default='Available')
+
+#     def __str__(self):
+#         return f'{self.book.title} - {self.status}'
+
+# class Borrows(models.Model):
+#     student = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
+#     book = models.ForeignKey(Books, on_delete=models.CASCADE, to_field='book_id')
+
+#     class Meta:
+#         unique_together = ('student', 'book')
+
+#     def __str__(self):
+#         return f'{self.student} - {self.book}'
+
+
+# class Lends(models.Model):
+#     student = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
+#     book = models.ForeignKey(Books, on_delete=models.CASCADE, to_field='book_id')
+
+#     class Meta:
+#         unique_together = ('student', 'book')
+
+#     def __str__(self):
+#         return f'{self.student} - {self.book}'
+
+# class Reviews(models.Model):
+  
+#     book = models.OneToOneField(Books, on_delete=models.CASCADE, primary_key=True, unique=True)
+#     review = models.OneToOneField(Receipt, on_delete=models.CASCADE, to_field='review', unique=True, max_length=255)
+
+
+#     def __str__(self):
+#         return f'{self.book} - {self.review}'
+
+
+# class Ratings(models.Model):
+#     book = models.OneToOneField(Books, on_delete=models.CASCADE, primary_key=True, unique=True)
+#     rating = models.OneToOneField(Receipt, on_delete=models.CASCADE, to_field='rating', unique=True)
+
+#     def __str__(self):
+#         return f'{self.book} - {self.rating}'
+
+# class Receipt_num(models.Model):
+#     book = models.OneToOneField(Books, on_delete=models.CASCADE, primary_key=True, related_name='receipt_numbers')
+#     receiptno = models.OneToOneField(Receipt, on_delete=models.CASCADE, to_field='receipt_no', unique=True)
+
+#     def __str__(self):
+#         return f'{self.book} - {self.receiptno}'
+
+# class Supply(models.Model):
+#     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='supplied_books', to_field='student_id')
+#     borrower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='borrowed_books', to_field='student_id')
+
+#     def __str__(self):
+#         return f'{self.owner} supplies to {self.borrower}'
