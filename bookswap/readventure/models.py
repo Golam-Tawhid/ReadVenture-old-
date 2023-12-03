@@ -26,6 +26,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     regular= models.BooleanField(default=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
 
+    booklist = models.ManyToManyField('Books', related_name='user_books')
+    wishlist= models.ManyToManyField('Books', related_name='user_wishlist')
+
     objects = UserManager()
 
     USERNAME_FIELD = 'student_id'
@@ -46,107 +49,60 @@ class Books(models.Model):
     language = models.CharField(max_length=30, default='N/A')
     condition = models.CharField(max_length=30, default='N/A')
 
+    
+    ratings = models.ManyToManyField('Receipt', related_name='books_ratings')
+    reviews = models.ManyToManyField('Receipt', related_name='books_reviews')
+    receipt_numbers = models.ManyToManyField('Receipt', related_name='books_receipt_numbers')
+
     def __str__(self):
         return self.title
     
 class Receipt(models.Model):
-    receipt_no = models.AutoField(primary_key=True)
-    book = models.ForeignKey(Books, on_delete=models.CASCADE)
+    receipt_no = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    book = models.OneToOneField(Books, on_delete=models.CASCADE)
     borrower = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    rating = models.IntegerField(default=0)
-    review = models.TextField(blank=True,max_length=100)
+    rating = models.IntegerField(default=0, unique=True)
+    review = models.TextField(blank=True, max_length=255)  
     due_date = models.DateField(default='N/A')
     return_date = models.DateField(default='N/A')
 
     def __str__(self):
         return str(self.receipt_no)
 
-class Wishlist(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
-    wishlist = models.CharField(max_length=30, default='N/A')
-
-    class Meta:
-        unique_together = ('student', 'wishlist')
+class Availability(models.Model):
+    book = models.OneToOneField(Books, on_delete=models.CASCADE, primary_key=True)
+    status = models.CharField(max_length=30, default='Available')
 
     def __str__(self):
-        return f'{self.student} - {self.wishlist}'
+        return f'{self.book.title} - {self.status}'
 
-class Booklist(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
-    booklist = models.CharField(max_length=30, default='N/A')
-
-    class Meta:
-        unique_together = ('student', 'booklist')
+class Borrows(models.Model):
+    student = models.ManyToManyField(User)
+    book = models.ManyToManyField(Books)
 
     def __str__(self):
-        return f'{self.student} - {self.booklist}'
-
-# class Author(models.Model):
-#     author = models.CharField(max_length=30, default='N/A')
-#     book= models.ForeignKey(Books, on_delete=models.CASCADE, to_field='book_id',related_name='authors')
-
-#     class Meta:
-#         unique_together = ('author', 'book')
-
-#     def __str__(self):
-#         return f'{self.author} - {self.book}'
+        return f'{self.student} - {self.book}'
 
 
-# class Availability(models.Model):
-#     book = models.OneToOneField(Books, on_delete=models.CASCADE, primary_key=True)
-#     status = models.CharField(max_length=30, default='Available')
+class Lends(models.Model):
+    student = models.ManyToManyField(User)
+    book = models.ManyToManyField(Books)
 
-#     def __str__(self):
-#         return f'{self.book.title} - {self.status}'
+    def __str__(self):
+        return f'{self.student} - {self.book}'
 
-# class Borrows(models.Model):
-#     student = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
-#     book = models.ForeignKey(Books, on_delete=models.CASCADE, to_field='book_id')
-
-#     class Meta:
-#         unique_together = ('student', 'book')
-
-#     def __str__(self):
-#         return f'{self.student} - {self.book}'
-
-
-# class Lends(models.Model):
-#     student = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
-#     book = models.ForeignKey(Books, on_delete=models.CASCADE, to_field='book_id')
-
-#     class Meta:
-#         unique_together = ('student', 'book')
-
-#     def __str__(self):
-#         return f'{self.student} - {self.book}'
-
-# class Reviews(models.Model):
-  
-#     book = models.OneToOneField(Books, on_delete=models.CASCADE, primary_key=True, unique=True)
-#     review = models.OneToOneField(Receipt, on_delete=models.CASCADE, to_field='review', unique=True, max_length=255)
-
-
-#     def __str__(self):
-#         return f'{self.book} - {self.review}'
-
-
-# class Ratings(models.Model):
-#     book = models.OneToOneField(Books, on_delete=models.CASCADE, primary_key=True, unique=True)
-#     rating = models.OneToOneField(Receipt, on_delete=models.CASCADE, to_field='rating', unique=True)
-
-#     def __str__(self):
-#         return f'{self.book} - {self.rating}'
-
-# class Receipt_num(models.Model):
-#     book = models.OneToOneField(Books, on_delete=models.CASCADE, primary_key=True, related_name='receipt_numbers')
-#     receiptno = models.OneToOneField(Receipt, on_delete=models.CASCADE, to_field='receipt_no', unique=True)
-
-#     def __str__(self):
-#         return f'{self.book} - {self.receiptno}'
-
+##prev
 # class Supply(models.Model):
 #     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='supplied_books', to_field='student_id')
 #     borrower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='borrowed_books', to_field='student_id')
 
 #     def __str__(self):
 #         return f'{self.owner} supplies to {self.borrower}'
+
+#GPT
+class Supply(models.Model):
+    supplier = models.ForeignKey(User, on_delete=models.CASCADE, related_name='supplied_books', to_field='student_id')
+    borrower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='borrowed_books', to_field='student_id')
+
+    def __str__(self):
+        return f'{self.supplier} supplies to {self.borrower}'
