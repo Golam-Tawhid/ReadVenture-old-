@@ -53,9 +53,9 @@
         </nav>
     </header>
 
-    <div class="container" style="background-image: url(static/images/home.jpg);">
-        <div class="card">
-            <div class="info">
+    <div class="container" style="background-image: url(/static/images/m.jpg);">
+        <div class="card" style="background-color:rgba(96, 238, 191, 0.491);">
+            <div class="info" style="background-color: rgb(32, 118, 118);">
                 <span>Profile Info</span>
                 <button id="savebutton">edit</button>
             </div>
@@ -63,23 +63,23 @@
                 <div class="forms">
                     <!-- Existing form inputs go here -->
                     <div class="inputs">
-                        <span>First Name</span>
+                        <span><b>First Name</b></span>
                         <input type="text" readonly value="{{ user.first_name }}">
                     </div>
                     <div class="inputs">
-                        <span>Last Name</span>
+                        <span><b>Last Name</b></span>
                         <input type="text" readonly value="{{ user.last_name }}">
                     </div>
                     <div class="inputs">
-                        <span>Email</span>
+                        <span><b>Email</b></span>
                         <input type="email" readonly value="{{ user.email }}">
                     </div>
                     <div class="inputs">
-                        <span>Student ID</span>
+                        <span><b>Student ID</b></span>
                         <input type="text" readonly value="{{ user.student_id }}">
                     </div>
                     <div class="inputs">
-                        <span>Contact No.</span>
+                        <span><b>Contact No.</b></span>
                         <input type="text" readonly value="{{ user.contact_no }}">
                     </div>                    
                 </div>
@@ -93,7 +93,7 @@
                         {% endif %}
                         <div id="profilePictureInput" class="file-input-container">
                             <input type="file" id="fileInput" accept="image/*" class="file-input" />
-                            <label for="fileInput" class="file-label">Upload Photo</label>
+                            <label for="fileInput" class="file-label">Update Photo</label>
                         </div>
                     </div>
                 </div>

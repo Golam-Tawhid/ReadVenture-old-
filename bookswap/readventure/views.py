@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from .forms import SignUpForm,Addbooksform
 from django.urls import reverse
@@ -21,11 +21,32 @@ def sign_in(request):
     return render(request, 'readventure/sign_in.html')
 
 def home(request):
+    # Check if the user is logged in
     if request.session.get('login_success'):
-        # del request.session['login_success']
+        # Check if it's a POST request (form submission)
+        if request.method == 'POST':
+            search_query = request.POST.get('search_query', '')
+            search_type = request.POST.get('search_type', 'all')
+
+            if search_type == 'all':
+                books = Books.objects.filter(title__icontains=search_query) | Books.objects.filter(author__icontains=search_query)
+            elif search_type == 'author':
+                books = Books.objects.filter(author__icontains=search_query)
+            elif search_type == 'title':
+                books = Books.objects.filter(title__icontains=search_query)
+            else:
+                books = Books.objects.all()
+
+            return render(request, 'readventure/home.html', {'books': books, 'search_query': search_query, 'search_type': search_type})
+
         return render(request, 'readventure/home.html')
+
+    # If not logged in, redirect to the sign-in page
     else:
         return redirect('sign_in')
+def bookinfo(request, book_id):
+    book = get_object_or_404(Books, book_id=book_id)
+    return render(request, 'readventure/bookinfo.html', {'book': book})
 
 def signup(request):
     if request.method == 'POST':

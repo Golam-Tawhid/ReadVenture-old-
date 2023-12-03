@@ -12,6 +12,10 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
+    def create_superuser(self, student_id, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self.create_user(student_id, email, password, **extra_fields)
 class User(AbstractBaseUser, PermissionsMixin):
     student_id = models.CharField(max_length=20, unique=True, primary_key=True)
     first_name = models.CharField(max_length=30, default='N/A')
@@ -35,7 +39,7 @@ class Books(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
     title = models.CharField(max_length=100, default='N/A')
     author = models.CharField(max_length=30, default='N/A')
-    isbn = models.CharField(max_length=20, unique=True, default='N/A')
+    isbn = models.CharField(max_length=20, default='N/A')
     genre = models.CharField(max_length=30, default='N/A')
     category = models.CharField(max_length=30, default='N/A')
     cover_photo = models.ImageField(upload_to='images/', default='images/default.jpg')

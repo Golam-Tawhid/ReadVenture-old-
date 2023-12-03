@@ -18,21 +18,50 @@
             <a href="{% url 'wishlist' %}">WISHLIST</a>
             <a href="{% url 'borrowed' %}">BORROWED</a>
             <a href="{% url 'profile' %}" style="margin-right: 20px;">PROFILE</a>
+            
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">LOGOUT</a>
+            {% endif %}
         </nav>
     </header>
 
+
     <section id="home" style="background-image: url(/static/images/home.jpg);">
         <h2 class="centered-text">Where pages become passports and<br> books become bridges between readers</h2>
-        <p class="smaller-text">Find Best Place, Restaurant, Hotel, Real State, and many more things in just One click</p>
+        <p class="smaller-text">Find the best books in just one click</p>
+       
         <div class="search-container">
-            <input type="text" placeholder="Looking for a book?...">
-            <select>
-                <option value="all">All</option>
-                <option value="author">Author</option>
-                <option value="title">Title</option>
-            </select>
-            <button type="button">Search</button>
+            <form method="post" action="{% url 'home' %}">
+                {% csrf_token %}
+                <input type="text" name="search_query" placeholder="Looking for a book?...">
+                <select name="search_type">
+                    <option value="all">All</option>
+                    <option value="author">Author</option>
+                    <option value="title">Title</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
         </div>
+
+        {% if books %}
+        <div class="search-results">
+            <h3>Search Results for "{{ search_query }}" (by {{ search_type }})</h3>
+            <ul>
+                {% for book in books %}
+                    <li class="book-item" style="background-color: lightblue;">
+                        <h4><a href="{% url 'bookinfo' book_id=book.book_id %}">{{ book.title }}</a></h4>
+                        <p style="color: blue;">by {{ book.author }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+            <div class="error-message">
+                <p>No books found for "{{ search_query }}" (by {{ search_type }}).</p>
+            </div>
+
+        {% endif %}
+
     </section>
 </body>
 </html>
