@@ -3,6 +3,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+import uuid
 
 urlpatterns = [
     path('', views.sign_in, name='sign_in'),
@@ -15,5 +16,9 @@ urlpatterns = [
     path('wishlist/', views.wishlist, name='wishlist'),
     path('borrowed/', views.borrowed, name='borrowed'),
     path('addbooks/', views.addbooks, name='addbooks'),
-    path('book_info/<uuid:book_id>/', views.bookinfo, name='bookinfo'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('bookinfo/<uuid:book_id>/', views.bookinfo, name='bookinfo'),
+    path('add_to_wishlist/<uuid:book_id>/', views.add_to_wishlist, name='add_to_wishlist'),
+    path('book_detail/<uuid:book_id>/', views.book_detail, name='book_detail'),
+    path('add_review/<uuid:book_id>/', views.add_review, name='add_review'),
+    path('request-to-borrow/<uuid:book_id>/', views.request_to_borrow, name='request_to_borrow'),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

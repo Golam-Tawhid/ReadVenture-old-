@@ -26,7 +26,7 @@
 
         <!-- Display user's books -->
         <div id="bookContainer">
-            {% for book in user_books %}
+            {% for book in user.wishlist.all %}
                 <div class="book">
                     <img src="{{ book.cover_photo.url }}" alt="{{ book.title }} Cover">
                     <h2>Title: {{ book.title }}</h2>
@@ -38,6 +38,7 @@
                 </div>
             {% endfor %}
         </div>
+        
     </section>
 
 </body>
