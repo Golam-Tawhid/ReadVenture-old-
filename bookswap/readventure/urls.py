@@ -16,4 +16,5 @@ urlpatterns = [
     path('borrowed/', views.borrowed, name='borrowed'),
     path('addbooks/', views.addbooks, name='addbooks'),
     path('book_info/<uuid:book_id>/', views.bookinfo, name='bookinfo'),
+    path('requests/', views.requests, name='requests'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
