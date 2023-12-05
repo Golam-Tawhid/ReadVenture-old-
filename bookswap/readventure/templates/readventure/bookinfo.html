@@ -30,7 +30,11 @@
             <div class="image-block">
                 <img class="book-cover" src="{{ book.cover_photo.url }}" alt="{{ book.title }} Cover">
                 <div class="buttons-section">
-                    <button class="wishlist-btn">Add to Wishlist </button>
+                    <form method="post" action="{% url 'add_to_wishlist' book_id=book.book_id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="wishlist-btn">Add to Wishlist</button>
+                    </form>
+                
                     <button class="borrow-btn">Request to Borrow </button>
                 </div>
             </div>
