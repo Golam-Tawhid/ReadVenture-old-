@@ -15,8 +15,12 @@
             <a href="{% url 'home' %}">HOME</a>
             <a href="{% url 'mybooks' %}">MY BOOKS</a>
             <a href="{% url 'wishlist' %}">WISHLIST</a>
-            <a href="{% url 'borrowed' %}"style="color: rgb(217, 196, 255);">BORROWED</a>
-            <a href="{% url 'profile' %}" style="margin-right: 20px;">PROFILE</a>
+            <a href="{% url 'borrowed' %}" style="color: rgb(217, 196, 255);">BORROWED</a>
+            <a href="{% url 'requests' %}">REQUESTS</a>
+            <a href="{% url 'profile' %}">PROFILE</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}", style="margin-right: 20px;">LOGOUT</a>
+            {% endif %}
         </nav>
     </header>
     

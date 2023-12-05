@@ -15,7 +15,7 @@
             <a href="{% url 'home' %}">HOME</a>
             <a href="{% url 'mybooks' %}">MY BOOKS</a>
             <a href="{% url 'wishlist' %}">WISHLIST</a>
-            <a href="">BORROWED</a>
+            <a href="{% url 'borrowed' %}">BORROWED</a>
             <a href="{% url 'requests' %}" style="color: rgb(217, 196, 255);">REQUESTS</a>
             <a href="{% url 'profile' %}">PROFILE</a>
             {% if user.is_authenticated %}
@@ -26,38 +26,23 @@
       <section id="home" >
         <section id="book-requests">
             <div class="request-block" style="margin-top: 0px;">
-                <h2>Incoming Requests</h2>
-                <div class="request">
-                    <p>Book ID: <span class="book-id">123</span></p>
-                    <p>Book Title: <span class="book-title">The Great Book</span></p>
-                    <p>Borrower ID: <span class="owner-id">456</span></p>
-                    <button class="ignore-btn">Ignore</button>
-                    <button class="accept-btn">Accept</button>
+
+
+                    <h2>Incoming Requests</h2>
+                    {% for receipt in incoming_requests %}
+                    <div class="request">
+                        <p>Book ID: <span class="book-id">{{ receipt.book.id }}</span></p>
+                        <p>Book Title: <span class="book-title">{{ receipt.book.title }}</span></p>
+                        <p>Borrower ID: <span class="owner-id">{{ receipt.borrower.id }}</span></p>
+                        <!-- Other details and buttons as needed -->
+                        <button class="ignore-btn">Ignore</button>
+                        <button class="accept-btn">Accept</button>
+                    </div>
+                    {% endfor %}
                 </div>
-                <!-- Add more incoming requests as needed -->
-                <div class="request">
-                    <p>Book ID: <span class="book-id">456</span></p>
-                    <p>Book Title: <span class="book-title">Awesome Novel</span></p>
-                    <p>Borrower ID: <span class="owner-id">789</span></p>
-                    <button class="ignore-btn">Ignore</button>
-                    <button class="accept-btn">Accept</button>
-                </div>
-                <div class="request">
-                    <p>Book ID: <span class="book-id">789</span></p>
-                    <p>Book Title: <span class="book-title">Mystery Thriller</span></p>
-                    <p>Borrower  ID: <span class="owner-id">123</span></p>
-                    <button class="ignore-btn">Ignore</button>
-                    <button class="accept-btn">Accept</button>
-                </div>
-                <div class="request">
-                    <p>Book ID: <span class="book-id">456</span></p>
-                    <p>Book Title: <span class="book-title">Awesome Novel</span></p>
-                    <p>Borrower ID: <span class="owner-id">789</span></p>
-                    <button class="ignore-btn">Ignore</button>
-                    <button class="accept-btn">Accept</button>
-                </div>
-            </div>
-        
+
+
+
             <div class="request-block" >
                 <h2>Outgoing Requests</h2>
                 <div class="request">
@@ -85,6 +70,9 @@
                     <button class="cancel-btn">Cancel</button>
                 </div>
             </div>
+
+            <!-- ... (other HTML code) ... -->
+
         </section>
         
       </section>
