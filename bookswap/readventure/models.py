@@ -16,6 +16,10 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(student_id, email, password, **extra_fields)
+    def add_to_wishlist(self, user, book):
+        # Add the book to the user's wishlist
+        user.wishlist.add(book)
+        
 class User(AbstractBaseUser, PermissionsMixin):
     student_id = models.CharField(max_length=20, unique=True, primary_key=True)
     first_name = models.CharField(max_length=30, default='N/A')
@@ -61,7 +65,7 @@ class Receipt(models.Model):
     receipt_no = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     book = models.OneToOneField(Books, on_delete=models.CASCADE)
     borrower = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    rating = models.IntegerField(default=0, unique=True)
+    rating = models.IntegerField(default=0)
     review = models.TextField(blank=True, max_length=255)  
     due_date = models.DateField(default='N/A')
     return_date = models.DateField(default='N/A')
@@ -106,3 +110,13 @@ class Supply(models.Model):
 
     def __str__(self):
         return f'{self.supplier} supplies to {self.borrower}'
+    
+# models.py
+
+# class Wishlist(models.Model):
+#     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='wishlists')
+#     book = models.ForeignKey(Books, on_delete=models.CASCADE)
+
+#     class Meta:
+#         unique_together = ('student', 'book')
+

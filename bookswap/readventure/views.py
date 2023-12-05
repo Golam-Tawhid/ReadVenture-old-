@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from .forms import SignUpForm,Addbooksform
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import Books
+from .models import Books, User
 
 def sign_in(request):
     if request.method == 'POST':
@@ -48,6 +48,18 @@ def home(request):
 def bookinfo(request, book_id):
     book = get_object_or_404(Books, book_id=book_id)
     return render(request, 'readventure/bookinfo.html', {'book': book})
+
+def add_to_wishlist(request, book_id):
+    if request.method == 'POST':
+        book = Books.objects.get(book_id=book_id)
+        # Assuming authenticated user
+        User.objects.add_to_wishlist(request.user, book)
+        return redirect('bookinfo', book_id=book_id)
+    else:
+        print("Book cannot be added to wishlist")
+
+    return render(request, 'home.html', {'book_id': book_id})
+
 
 def signup(request):
     if request.method == 'POST':
