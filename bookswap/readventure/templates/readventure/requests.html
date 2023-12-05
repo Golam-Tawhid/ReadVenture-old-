@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Requests</title>
+    <link rel="stylesheet" href="{% static 'css/request.css' %}">
+</head>
+<body style="background-image: url(/static/images/img22.jpg);">
+    
+    <header>
+        <nav><a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a></nav>
+        <nav>
+            <a href="{% url 'home' %}">HOME</a>
+            <a href="{% url 'mybooks' %}">MY BOOKS</a>
+            <a href="{% url 'wishlist' %}">WISHLIST</a>
+            <a href="">BORROWED</a>
+            <a href="{% url 'requests' %}" style="color: rgb(217, 196, 255);">REQUESTS</a>
+            <a href="{% url 'profile' %}">PROFILE</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}", style="margin-right: 20px;">LOGOUT</a>
+            {% endif %}
+        </nav>
+    </header>
+      <section id="home" >
+        <section id="book-requests">
+            <div class="request-block" style="margin-top: 0px;">
+                <h2>Incoming Requests</h2>
+                <div class="request">
+                    <p>Book ID: <span class="book-id">123</span></p>
+                    <p>Book Title: <span class="book-title">The Great Book</span></p>
+                    <p>Borrower ID: <span class="owner-id">456</span></p>
+                    <button class="ignore-btn">Ignore</button>
+                    <button class="accept-btn">Accept</button>
+                </div>
+                <!-- Add more incoming requests as needed -->
+                <div class="request">
+                    <p>Book ID: <span class="book-id">456</span></p>
+                    <p>Book Title: <span class="book-title">Awesome Novel</span></p>
+                    <p>Borrower ID: <span class="owner-id">789</span></p>
+                    <button class="ignore-btn">Ignore</button>
+                    <button class="accept-btn">Accept</button>
+                </div>
+                <div class="request">
+                    <p>Book ID: <span class="book-id">789</span></p>
+                    <p>Book Title: <span class="book-title">Mystery Thriller</span></p>
+                    <p>Borrower  ID: <span class="owner-id">123</span></p>
+                    <button class="ignore-btn">Ignore</button>
+                    <button class="accept-btn">Accept</button>
+                </div>
+                <div class="request">
+                    <p>Book ID: <span class="book-id">456</span></p>
+                    <p>Book Title: <span class="book-title">Awesome Novel</span></p>
+                    <p>Borrower ID: <span class="owner-id">789</span></p>
+                    <button class="ignore-btn">Ignore</button>
+                    <button class="accept-btn">Accept</button>
+                </div>
+            </div>
+        
+            <div class="request-block" >
+                <h2>Outgoing Requests</h2>
+                <div class="request">
+                    <p>Book ID: <span class="book-id">789</span></p>
+                    <p>Book Title: <span class="book-title">Another Book</span></p>
+                    <p>Owner ID: <span class="owner-id">012</span></p>
+                    <button class="cancel-btn">Cancel</button>
+                </div>
+                <div class="request">
+                    <p>Book ID: <span class="book-id">789</span></p>
+                    <p>Book Title: <span class="book-title">Another Book</span></p>
+                    <p>Owner ID: <span class="owner-id">012</span></p>
+                    <button class="cancel-btn">Cancel</button>
+                </div>
+                <div class="request">
+                    <p>Book ID: <span class="book-id">789</span></p>
+                    <p>Book Title: <span class="book-title">Another Book</span></p>
+                    <p>Owner ID: <span class="owner-id">012</span></p>
+                    <button class="cancel-btn">Cancel</button>
+                </div>
+                <div class="request">
+                    <p>Book ID: <span class="book-id">789</span></p>
+                    <p>Book Title: <span class="book-title">Another Book</span></p>
+                    <p>Owner ID: <span class="owner-id">012</span></p>
+                    <button class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </section>
+        
+      </section>
+</body>
+</html>

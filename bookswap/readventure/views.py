@@ -103,3 +103,6 @@ def borrowed(request):
         'books': Books.objects.all(),
     }
     return render(request, 'readventure/borrowed.html', context)
+
+def requests(request):
+    ############ DUNNO WHAT TO WRITE ######################
