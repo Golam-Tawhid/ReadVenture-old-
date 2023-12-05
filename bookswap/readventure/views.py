@@ -44,6 +44,7 @@ def home(request):
     # If not logged in, redirect to the sign-in page
     else:
         return redirect('sign_in')
+    
 def bookinfo(request, book_id):
     book = get_object_or_404(Books, book_id=book_id)
     return render(request, 'readventure/bookinfo.html', {'book': book})
@@ -103,6 +104,3 @@ def borrowed(request):
         'books': Books.objects.all(),
     }
     return render(request, 'readventure/borrowed.html', context)
-
-def requests(request):
-    ############ DUNNO WHAT TO WRITE ######################
