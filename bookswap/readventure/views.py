@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from .forms import SignUpForm,Addbooksform
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import Books, User
+from .models import Books, User, Receipt
 
 def sign_in(request):
     if request.method == 'POST':
@@ -116,3 +116,6 @@ def borrowed(request):
         'books': Books.objects.all(),
     }
     return render(request, 'readventure/borrowed.html', context)
+
+def requests(request):
+    ############ DUNNO WHAT TO WRITE ######################
