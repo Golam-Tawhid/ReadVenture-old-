@@ -32,6 +32,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     booklist = models.ManyToManyField('Books', related_name='user_books')
     wishlist= models.ManyToManyField('Books', related_name='user_wishlist')
+   
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     objects = UserManager()
 
