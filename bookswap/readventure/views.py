@@ -145,3 +145,4 @@ def requests(request):
 
 def custom_logout(request):
     logout(request)
+    return redirect('sign_in')
