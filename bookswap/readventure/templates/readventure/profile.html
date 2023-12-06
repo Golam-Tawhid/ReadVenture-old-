@@ -9,35 +9,91 @@
     <link rel="icon" href="{% static 'icon/favicon.ico' %}">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var savebutton = document.getElementById('savebutton');
-            var readonly = true;
-            var inputs = document.querySelectorAll('.forms input[type="text"]');
-            var profilePictureInput = document.getElementById('profilePictureInput');
-            var profilePicture = document.getElementById('profilePicture');
+        var savebutton = document.getElementById('savebutton');
+        var readonly = true;
+        var inputs = document.querySelectorAll('.forms input[type="text"]');
+        var profilePictureInput = document.getElementById('profilePictureInput');
+        var profilePicture = document.getElementById('profilePicture');
 
-            savebutton.addEventListener('click', function () {
-                for (var i = 0; i < inputs.length; i++) {
-                    inputs[i].toggleAttribute('readonly');
-                }
-                profilePictureInput.toggleAttribute('disabled');
+        savebutton.addEventListener('click', function () {
+            // Toggle read-only attribute for text inputs
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].toggleAttribute('readonly');
+            }
+            // Toggle disabled attribute for profile picture input
+            profilePictureInput.toggleAttribute('disabled');
 
-                if (savebutton.innerHTML == "edit") {
-                    savebutton.innerHTML = "save";
-                } else {
-                    savebutton.innerHTML = "edit";
-                }
-            });
-            profilePictureInput.addEventListener('change', function (event) {
-                var file = event.target.files[0];
-                if (file) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        profilePicture.src = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
+            // Change button text
+            if (savebutton.innerHTML == "edit") {
+                savebutton.innerHTML = "save";
+            } else {
+                savebutton.innerHTML = "edit";
+                
+                // If 'save' button clicked, update user information
+                updateUserInfo();
+            }
         });
+
+        profilePictureInput.addEventListener('change', function (event) {
+            // Update profile picture preview
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    profilePicture.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function updateUserInfo() {
+            // Get updated values from the inputs
+            var firstName = document.querySelector('.inputs input[name="first_name"]').value;
+            var lastName = document.querySelector('.inputs input[name="last_name"]').value;
+            var email = document.querySelector('.inputs input[name="email"]').value;
+            var contactNo = document.querySelector('.inputs input[name="contact_no"]').value;
+
+            // Make an AJAX request to update user information
+            fetch('{% url "save_profile" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify({
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: email,
+                    contact_no: contactNo,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('User information updated:', data);
+                // You can add additional logic or UI updates if needed
+            })
+            .catch(error => {
+                console.error('Error updating user information:', error);
+            });
+        }
+
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Check if cookie name matches the requested name
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    });
 
     </script>
 </head>
