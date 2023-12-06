@@ -18,7 +18,11 @@
             <a href="{% url 'mybooks' %}">MY BOOKS</a>
             <a href="{% url 'wishlist' %}" style="color: rgb(217, 196, 255);">WISHLIST</a>
             <a href="{% url 'borrowed' %}">BORROWED</a>
-            <a href="{% url 'profile' %}" style="margin-right: 20px;">PROFILE</a>
+            <a href="{% url 'requests' %}">REQUESTS</a>
+            <a href="{% url 'profile' %}">PROFILE</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}", style="margin-right: 20px;">LOGOUT</a>
+            {% endif %}
         </nav>
     </header>
     <section class="lower" style="background-image: url(/static/images/booklist.jpg);">

@@ -17,4 +17,11 @@ urlpatterns = [
     path('borrowed/', views.borrowed, name='borrowed'),
     path('addbooks/', views.addbooks, name='addbooks'),
     path('bookinfo/<uuid:book_id>/', views.bookinfo, name='bookinfo'),
+    path('requests/', views.requests, name='requests'),
+    # path('add_to_wishlist/<uuid:book_id>/', views.add_to_wishlist, name='add_to_wishlist'),
+    # path('book_detail/<uuid:book_id>/', views.book_detail, name='book_detail'),
+    # path('add_review/<uuid:book_id>/', views.add_review, name='add_review'),
+    # path('request-to-borrow/<uuid:book_id>/', views.request_to_borrow, name='request_to_borrow'),
+    path('add-to-wishlist/<uuid:book_id>/', views.add_to_wishlist, name='add_to_wishlist'),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
