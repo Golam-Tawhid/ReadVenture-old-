@@ -127,5 +127,12 @@ def borrowed(request):
     }
     return render(request, 'readventure/borrowed.html', context)
 
-# def requests(request):
-#     ############ DUNNO WHAT TO WRITE ######################
+def requests(request):
+     # Get the current user (book owner)
+    owner = request.user
+
+    # Retrieve all receipt entries related to the books owned by the current user
+    owned_books = Books.objects.filter(owner=owner)
+    incoming_requests = Receipt.objects.filter(book__in=owned_books)
+
+    return render(request, 'readventure/requests.html', {'incoming_requests': incoming_requests})

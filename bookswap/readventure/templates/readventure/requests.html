@@ -43,33 +43,23 @@
 
 
 
-            <div class="request-block" >
+            <!-- ... (other HTML code) ... -->
+
+            <div class="request-block">
                 <h2>Outgoing Requests</h2>
-                <div class="request">
-                    <p>Book ID: <span class="book-id">789</span></p>
-                    <p>Book Title: <span class="book-title">Another Book</span></p>
-                    <p>Owner ID: <span class="owner-id">012</span></p>
-                    <button class="cancel-btn">Cancel</button>
-                </div>
-                <div class="request">
-                    <p>Book ID: <span class="book-id">789</span></p>
-                    <p>Book Title: <span class="book-title">Another Book</span></p>
-                    <p>Owner ID: <span class="owner-id">012</span></p>
-                    <button class="cancel-btn">Cancel</button>
-                </div>
-                <div class="request">
-                    <p>Book ID: <span class="book-id">789</span></p>
-                    <p>Book Title: <span class="book-title">Another Book</span></p>
-                    <p>Owner ID: <span class="owner-id">012</span></p>
-                    <button class="cancel-btn">Cancel</button>
-                </div>
-                <div class="request">
-                    <p>Book ID: <span class="book-id">789</span></p>
-                    <p>Book Title: <span class="book-title">Another Book</span></p>
-                    <p>Owner ID: <span class="owner-id">012</span></p>
-                    <button class="cancel-btn">Cancel</button>
-                </div>
+                {% for request in outgoing_requests %}
+                    <div class="request">
+                        <p>Book ID: <span class="book-id">{{ request.book.id }}</span></p>
+                        <p>Book Title: <span class="book-title">{{ request.book.title }}</span></p>
+                        <p>Owner ID: <span class="owner-id">{{ request.owner.id }}</span></p>
+                        <!-- Other details and buttons as needed -->
+                        <button class="cancel-btn">Cancel</button>
+                    </div>
+                {% endfor %}
             </div>
+
+<!-- ... (other HTML code) ... -->
+
 
             <!-- ... (other HTML code) ... -->
 
