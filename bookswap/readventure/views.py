@@ -60,6 +60,16 @@ def add_to_wishlist(request, book_id):
 
     return render(request, 'home.html', {'book_id': book_id})
 
+def request_to_borrow(request, book_id):
+    if request.method == 'POST':
+        book = Books.objects.get(book_id=book_id)
+        # Assuming authenticated user
+        book.request_to_borrow(request.user)
+        return redirect('bookinfo', book_id=book_id)
+    else:
+        print("Book cannot be requested to borrow")
+
+    return render(request, 'readventure/home.html', {'book_id': book_id})
 
 def signup(request):
     if request.method == 'POST':
@@ -117,5 +127,5 @@ def borrowed(request):
     }
     return render(request, 'readventure/borrowed.html', context)
 
-def requests(request):
-    ############ DUNNO WHAT TO WRITE ######################
+# def requests(request):
+#     ############ DUNNO WHAT TO WRITE ######################

@@ -58,6 +58,9 @@ class Books(models.Model):
     reviews = models.ManyToManyField('Receipt', related_name='books_reviews')
     receipt_numbers = models.ManyToManyField('Receipt', related_name='books_receipt_numbers')
 
+    def request_to_borrow(self, borrower):
+        Receipt.objects.create(book=self, borrower=borrower)
+
     def __str__(self):
         return self.title
     

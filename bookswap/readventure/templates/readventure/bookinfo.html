@@ -34,8 +34,10 @@
                         {% csrf_token %}
                         <button type="submit" class="wishlist-btn">Add to Wishlist</button>
                     </form>
-                
-                    <button class="borrow-btn">Request to Borrow </button>
+                    <form method="post" action="{% url 'request_to_borrow' book_id=book.book_id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="request-btn">Request to Borrow </button>
+                    </form>
                 </div>
             </div>
 
