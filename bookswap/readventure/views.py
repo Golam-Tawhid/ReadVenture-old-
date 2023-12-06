@@ -4,6 +4,7 @@ from .forms import SignUpForm,Addbooksform
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Books, User, Receipt
+from django.contrib.auth import logout
 
 def sign_in(request):
     if request.method == 'POST':
@@ -118,4 +119,8 @@ def borrowed(request):
     return render(request, 'readventure/borrowed.html', context)
 
 def requests(request):
-    ############ DUNNO WHAT TO WRITE ######################
+    return render(request, 'readventure/requests.html')
+
+def custom_logout(request):
+    logout(request)
+    return redirect('sign_in')  # Redirect to the sign_in page or any other desired page

@@ -19,9 +19,7 @@
             <a href="{% url 'borrowed' %}">BORROWED</a>
             <a href="{% url 'requests' %}">REQUESTS</a>
             <a href="{% url 'profile' %}">PROFILE</a>
-            {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}", style="margin-right: 20px;">LOGOUT</a>
-            {% endif %}
+            <a href="{% url 'logout' %}">LOGOUT</a>
         </nav>
     </header>
     <section class="lower" style="background-image: url(/static/images/j.jpg);">
