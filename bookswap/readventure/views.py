@@ -63,13 +63,18 @@ def add_to_wishlist(request, book_id):
 def request_to_borrow(request, book_id):
     if request.method == 'POST':
         book = Books.objects.get(book_id=book_id)
-        # Assuming authenticated user
-        book.request_to_borrow(request.user)
-        return redirect('bookinfo', book_id=book_id)
-    else:
-        print("Book cannot be requested to borrow")
+        owner = book.owner
 
+        # Create a request entry for the owner
+        Receipt.objects.create(book=book, borrower=request.user)  # Assuming authenticated user
+
+        # Redirect to a success page or wherever needed
+        return redirect('bookinfo', book_id=book_id)
+    
+    else:
+        print("Book cannot be added")
     return render(request, 'readventure/home.html', {'book_id': book_id})
+
 
 def signup(request):
     if request.method == 'POST':
