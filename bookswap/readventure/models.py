@@ -58,17 +58,20 @@ class Books(models.Model):
     reviews = models.ManyToManyField('Receipt', related_name='books_reviews')
     receipt_numbers = models.ManyToManyField('Receipt', related_name='books_receipt_numbers')
 
+    def request_to_borrow(self, borrower):
+        Receipt.objects.create(book=self, borrower=borrower)
+
     def __str__(self):
         return self.title
     
 class Receipt(models.Model):
-    receipt_no = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    receipt_no = models.AutoField(primary_key=True, editable=False, unique=True)
     book = models.OneToOneField(Books, on_delete=models.CASCADE)
     borrower = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     rating = models.IntegerField(default=0)
     review = models.TextField(blank=True, max_length=255)  
-    due_date = models.DateField(default='N/A')
-    return_date = models.DateField(default='N/A')
+    due_date = models.DateField(null=True, blank=True)
+    return_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return str(self.receipt_no)
