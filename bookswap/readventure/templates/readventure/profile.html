@@ -54,7 +54,7 @@
             var contactNo = document.querySelector('.inputs input[name="contact_no"]').value;
 
             // Make an AJAX request to update user information
-            fetch('{% url "save_profile" %}', {
+            fetch('{% url "profile" %}', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
