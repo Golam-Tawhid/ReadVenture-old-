@@ -47,11 +47,23 @@
 						<i class="zmdi zmdi-lock"></i>
 					</div>
 					<div class="form-wrapper">
+						<label for="id_profile_picture">Upload Picture:</label>
 						<input type="file" name="profile_picture" placeholder="Upload File" class="form-control">
 					</div>
 					<button type="submit">Create Account ⁠(⁠◕⁠ᴗ⁠◕⁠) <i class="zmdi zmdi-arrow-right"></i></button>
 				</form>
-				
+				{% if errors %}
+				<div class="alert alert-danger mt-3">
+				  <strong>Error:</strong> Please fix the errors below.
+				  <ul>
+					{% for error_list in errors %}
+					  {% for error in error_list %}
+						<li>{{ error }}</li>
+					  {% endfor %}
+					{% endfor %}
+				  </ul>
+				</div>
+			  {% endif %}	
 			</div>
 		</div>
 		

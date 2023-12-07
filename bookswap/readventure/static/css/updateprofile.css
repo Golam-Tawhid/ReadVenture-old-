@@ -45,15 +45,22 @@ nav a:hover {
 
 .card {
     width: 100%;
-    max-width: 500px; /* Adjust the maximum width as needed */
+    max-width: 500px;
     margin: 0 auto;
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
 }
 
+.fixed-background {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; /* Ensures the background covers the full height of the viewport */
+}
+
 .card-header {
-    background-color: #333;
+    background-color: #1b1b5c;
     color: white;
     text-align: center;
     padding: 15px;

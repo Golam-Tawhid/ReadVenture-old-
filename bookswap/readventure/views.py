@@ -93,7 +93,9 @@ def signup(request):
     else:
         form = SignUpForm()
     
-    return render(request, 'readventure/sign_up.html', {'form': form})
+    errors = form.errors.values() if form.errors else None
+
+    return render(request, 'readventure/sign_up.html', {'form': form, 'errors': errors})
 
 @login_required
 def addbooks(request):

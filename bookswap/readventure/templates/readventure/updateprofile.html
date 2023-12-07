@@ -14,19 +14,20 @@
         <nav><a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a></nav>
         <nav>
             <a href="{% url 'home' %}">HOME</a>
-            <a href="{% url 'mybooks' %}">MY BOOKS</a>
+            <a href="{% url 'mybooks' %}" style="color: rgb(217, 196, 255);">MY BOOKS</a>
             <a href="{% url 'wishlist' %}">WISHLIST</a>
             <a href="{% url 'borrowed' %}">BORROWED</a>
             <a href="{% url 'requests' %}">REQUESTS</a>
-            <a href="{% url 'profile' %}" style="color: rgb(217, 196, 255);">PROFILE</a>
+            <a href="{% url 'profile' %}">PROFILE</a>
             <a href="{% url 'logout' %}">LOGOUT</a>
         </nav>
     </header>
-    <div class="container my-5">
+
+    <div class="container my-5 fixed-background" style="background-image: url(/static/images/m.jpg);">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <div class="card">
-                    <div class="card-header text-center">
+                <div class="card" style="background-image: url(/static/images/img6.jpg);">
+                    <div class="card-header text-center" style="background-color: darkslategrey;">
                         <h3>Update Profile</h3>
                     </div>
                     <div class="card-body">
