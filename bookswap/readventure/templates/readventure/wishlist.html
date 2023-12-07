@@ -30,17 +30,25 @@
         <div id="bookContainer">
             {% for book in user.wishlist.all %}
                 <div class="book">
-                    <img src="{{ book.cover_photo.url }}" alt="{{ book.title }} Cover">
-                    <h2>Title: {{ book.title }}</h2>
-                    <p>Author: {{ book.author }}</p>
-                    <p>Genre: {{ book.genre }}</p>
-                    <p>Category: {{ book.category }}</p>
-                    <p>Language: {{ book.language }}</p>
-                    <p>ISBN: {{ book.isbn }}</p>
-                </div>
-            {% endfor %}
-        </div>
-        
+                    <form method="post" action="{% url 'remove_from_wishlist' book.book_id %}">
+                        {% csrf_token %}
+                        <img src="{{ book.cover_photo.url }}" alt="{{ book.title }} Cover">
+                        <h2>Title: {{ book.title }}</h2>
+                        <p>Author: {{ book.author }}</p>
+                        <p>Genre: {{ book.genre }}</p>
+                        <p>Category: {{ book.category }}</p>
+                        <p>Language: {{ book.language }}</p>
+                        <p>ISBN: {{ book.isbn }}</p>
+
+                        <!-- Add a form for removing the book from wishlist -->
+                        
+                        <button type="submit">Remove </button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+
+    
     </section>
 
 </body>

@@ -20,6 +20,9 @@ urlpatterns = [
     path('bookinfo/<uuid:book_id>/', views.bookinfo, name='bookinfo'),
     path('requests/', views.requests, name='requests'),
     path('remove_book/<uuid:book_id>/', views.remove_book, name='remove_book'),
+    path('remove_from_wishlist/<uuid:book_id>/', views.remove_from_wishlist, name='remove_from_wishlist'),
+
+
 
 
     # path('add_to_wishlist/<uuid:book_id>/', views.add_to_wishlist, name='add_to_wishlist'),

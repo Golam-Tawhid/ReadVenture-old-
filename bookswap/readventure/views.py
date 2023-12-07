@@ -127,9 +127,6 @@ def profile(request):
 
 def mybooks(request):
     user_books = Books.objects.filter(owner=request.user)
-    #me 
-   
-    
     for book in user_books:
         print(f'Book ID: {book.book_id}, Title: {book.title}, Owner: {book.owner}')
    
@@ -140,6 +137,7 @@ def wishlist(request):
     context = {
         'books': Books.objects.all(),
     }
+    user_wishlist = request.user.wishlist.all()
     return render(request, 'readventure/wishlist.html', context)
 
 def borrowed(request):
@@ -162,19 +160,6 @@ def custom_logout(request):
     logout(request)
     return redirect('sign_in')
 
-
-
-
-
-
-
-
-
-
-
-
-
-# views.py
 from django.http import Http404
 
 def remove_book(request, book_id):
@@ -186,6 +171,16 @@ def remove_book(request, book_id):
         # Handle the case where the book with the given ID doesn't exist
         raise Http404("Book does not exist")
     return redirect('mybooks')
+
+
+
+def remove_from_wishlist(request, book_id):
+    # Remove the book from the wishlist
+    book = get_object_or_404(Books, book_id=book_id)
+    request.user.wishlist.remove(book)
+
+    return redirect('wishlist')  
+
 
 
 
