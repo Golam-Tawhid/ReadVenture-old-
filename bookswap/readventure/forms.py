@@ -18,3 +18,9 @@ class Addbooksform(forms.ModelForm):
     class Meta:
         model = Books
         fields = ['title', 'author', 'isbn', 'genre', 'category', 'cover_photo', 'language', 'condition']
+
+
+class UpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['student_id', 'first_name', 'last_name', 'email', 'contact_no', 'profile_picture']

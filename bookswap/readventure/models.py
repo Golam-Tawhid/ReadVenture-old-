@@ -126,3 +126,16 @@ class Supply(models.Model):
 #     class Meta:
 #         unique_together = ('student', 'book')
 
+from PIL import Image
+
+# resizing images
+def save(self, *args, **kwargs):
+    super(Supply, self).save(*args, **kwargs)
+
+    img = Image.open(self.avatar.path)
+
+    if img.height > 100 or img.width > 100:
+        new_img = (100, 100)
+        img.thumbnail(new_img)
+        img.save(self.avatar.path)
+

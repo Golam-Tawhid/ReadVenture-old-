@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
-from .forms import SignUpForm,Addbooksform
+from .forms import SignUpForm,Addbooksform, UpdateUserForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Books, User, Receipt
 from django.contrib.auth import logout
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
 
 def sign_in(request):
     if request.method == 'POST':
@@ -146,3 +149,21 @@ def requests(request):
 def custom_logout(request):
     logout(request)
     return redirect('sign_in')
+
+def update_user(request):
+    if request.method == 'POST':
+        form = UpdateUserForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+        else:
+            print(form.errors)
+    else:
+        form = UpdateUserForm(instance=request.user)
+    
+    return render(request, 'readventure/updateprofile.html', {'form': form})
+
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'readventure/change_password.html'
+    success_message = "Successfully Changed Your Password"
+    success_url = reverse_lazy('sign_in')

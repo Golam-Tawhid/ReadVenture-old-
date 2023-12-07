@@ -7,7 +7,7 @@
     <title>MY PROFILE</title>
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link rel="icon" href="{% static 'icon/favicon.ico' %}">
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function () {
         var savebutton = document.getElementById('savebutton');
         var readonly = true;
@@ -95,7 +95,7 @@
         }
     });
 
-    </script>
+    </script> -->
 </head>
 <body>
     <header>
@@ -115,7 +115,7 @@
         <div class="card" style="background-color:rgba(96, 238, 191, 0.491);">
             <div class="info" style="background-color: rgb(32, 118, 118);">
                 <span>Profile Info</span>
-                <button id="savebutton">edit</button>
+                <!-- <button id="savebutton">edit</button> -->
             </div>
             <div class="content">
                 <div class="forms">
@@ -139,7 +139,7 @@
                     <div class="inputs">
                         <span><b>Contact No.</b></span>
                         <input type="text" readonly value="{{ user.contact_no }}">
-                    </div>                    
+                    </div>              
                 </div>
                 <div class="image-container">
                     <div class="inputs">
@@ -150,8 +150,10 @@
                             <img id="profilePicture" src="{% static 'images/profile.jpg' %}" alt="Default Profile Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
                         {% endif %}
                         <div id="profilePictureInput" class="file-input-container">
-                            <input type="file" id="fileInput" accept="image/*" class="file-input" />
-                            <label for="fileInput" class="file-label">Update Photo</label>
+                            <!-- <input type="file" id="fileInput" accept="image/*" class="file-input" /> -->
+                            <!-- <label for="fileInput" class="file-label">Update Photo</label> -->
+                            <label for="fileInput" class="file-label"><a href="{% url 'update_user' %}">Update Profile</a></label>
+                            
                         </div>
                     </div>
                 </div>
