@@ -1,4 +1,5 @@
 {% load static %}
+{% load my_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +14,43 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat&family=Sacramento&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .message {
+            margin-top: 20px;
+        }
+    
+        .messages {
+            list-style: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    
+        .success {
+            color: #155724;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+    
+        .info {
+            color: #0c5460;
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+        }
+    
+        .warning {
+            color: #856404;
+            background-color: #ffeeba;
+            border: 1px solid #ffc107;
+        }
+    
+        .error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+    
 
 </head>
 <body class="img js-fullheight" style="background-image: url('/static/images/img10.jpg');">
@@ -60,6 +98,16 @@
                         <div class="social d-flex text-center">
                             <a href="{% url 'sign_up' %}" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-google mr-2"></span>Sign Up</a>
                         </div>
+                        <div class="message">
+                            {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                     {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                        
                     </div>
                 </div>
             </div>

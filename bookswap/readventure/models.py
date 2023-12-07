@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.contrib.auth import get_user_model
 import uuid
+from PIL import Image
 
 class UserManager(BaseUserManager):
     def create_user(self, student_id, email, password=None, **extra_fields):
@@ -71,7 +72,7 @@ class Receipt(models.Model):
     receipt_no = models.AutoField(primary_key=True, editable=False, unique=True)
     book = models.OneToOneField(Books, on_delete=models.CASCADE)
     borrower = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    rating = models.IntegerField(default=0)
+    rating = models.IntegerField(blank=True, null=True)
     review = models.TextField(blank=True, max_length=255)  
     due_date = models.DateField(null=True, blank=True)
     return_date = models.DateField(null=True, blank=True)
@@ -125,4 +126,17 @@ class Supply(models.Model):
 
 #     class Meta:
 #         unique_together = ('student', 'book')
+
+
+
+# resizing images
+def save(self, *args, **kwargs):
+    super(Supply, self).save(*args, **kwargs)
+
+    img = Image.open(self.avatar.path)
+
+    if img.height > 100 or img.width > 100:
+        new_img = (100, 100)
+        img.thumbnail(new_img)
+        img.save(self.avatar.path)
 

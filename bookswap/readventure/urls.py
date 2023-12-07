@@ -27,5 +27,6 @@ urlpatterns = [
     # path('add_review/<uuid:book_id>/', views.add_review, name='add_review'),
     path('request_to_borrow/<uuid:book_id>/', views.request_to_borrow, name='request_to_borrow'),
     path('add-to-wishlist/<uuid:book_id>/', views.add_to_wishlist, name='add_to_wishlist'),
-
+    path('update_user/', views.update_user, name='update_user'),
+    path('password-change/', views.ChangePasswordView.as_view(), name='password_change'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

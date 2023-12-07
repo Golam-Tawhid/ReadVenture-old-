@@ -1,11 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
-from .forms import SignUpForm,Addbooksform
+from .forms import SignUpForm,Addbooksform, UpdateUserForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Books, User, Receipt
 from django.contrib.auth import logout
 #from django.http import Http404
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 def sign_in(request):
     if request.method == 'POST':
@@ -18,7 +22,8 @@ def sign_in(request):
             request.session['login_success'] = True
             return redirect('home')
         else:
-            return render(request, 'readventure/sign_in.html', {'error_message': 'Invalid login credentials'})
+           # return render(request, 'readventure/sign_in.html', {'error_message': 'Invalid login credentials'})
+           messages.error(request, 'Invalid login credentials')
         
     return render(request, 'readventure/sign_in.html')
 
@@ -89,7 +94,9 @@ def signup(request):
     else:
         form = SignUpForm()
     
-    return render(request, 'readventure/sign_up.html', {'form': form})
+    errors = form.errors.values() if form.errors else None
+
+    return render(request, 'readventure/sign_up.html', {'form': form, 'errors': errors})
 
 @login_required
 def addbooks(request):
@@ -181,3 +188,22 @@ def remove_book(request, book_id):
     return redirect('mybooks')
 
 
+
+
+def update_user(request):
+    if request.method == 'POST':
+        form = UpdateUserForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+        else:
+            print(form.errors)
+    else:
+        form = UpdateUserForm(instance=request.user)
+    
+    return render(request, 'readventure/updateprofile.html', {'form': form})
+
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'readventure/change_password.html'
+    success_message = "Successfully Changed Your Password"
+    success_url = reverse_lazy('sign_in')

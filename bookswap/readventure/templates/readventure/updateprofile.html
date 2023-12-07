@@ -1,0 +1,96 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPDATE PROFILE</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/updateprofile.css' %}">
+    <link rel="icon" href="{% static 'icon/favicon.ico' %}">
+</head>
+<body>
+    <header>
+        <nav><a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a></nav>
+        <nav>
+            <a href="{% url 'home' %}">HOME</a>
+            <a href="{% url 'mybooks' %}" style="color: rgb(217, 196, 255);">MY BOOKS</a>
+            <a href="{% url 'wishlist' %}">WISHLIST</a>
+            <a href="{% url 'borrowed' %}">BORROWED</a>
+            <a href="{% url 'requests' %}">REQUESTS</a>
+            <a href="{% url 'profile' %}">PROFILE</a>
+            <a href="{% url 'logout' %}">LOGOUT</a>
+        </nav>
+    </header>
+
+    <div class="container my-5 fixed-background" style="background-image: url(/static/images/m.jpg);">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card" style="background-image: url(/static/images/img6.jpg);">
+                    <div class="card-header text-center" style="background-color: darkslategrey;">
+                        <h3>Update Profile</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            {% if user.profile_picture %}
+                                <img id="profilePicture" src="{{ user.profile_picture.url }}" alt="Profile Picture" class="img-fluid rounded-circle">
+                            {% else %}
+                                <img id="profilePicture" src="{% static 'images/profile.jpg' %}" alt="Default Profile Picture" class="img-fluid rounded-circle">
+                            {% endif %}
+                        </div>
+                        {% if form.errors %}
+                            <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                                <div id="form_errors">
+                                    {% for key, value in form.errors.items %}
+                                        <strong>{{ value }}</strong>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="id_student_id">Student ID:</label>
+                                        {{ form.student_id }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id_first_name">First Name:</label>
+                                        {{ form.first_name }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id_last_name">Last Name:</label>
+                                        {{ form.last_name }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id_email">Email:</label>
+                                        {{ form.email }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id_contact_no">Contact No.:</label>
+                                        {{ form.contact_no }}
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="{% url 'password_change' %}">Change Password</a>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id_profile_picture">Change Picture:</label>
+                                        {{ form.profile_picture }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
+</body>
+</html>
