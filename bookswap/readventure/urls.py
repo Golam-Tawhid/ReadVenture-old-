@@ -19,6 +19,9 @@ urlpatterns = [
     path('addbooks/', views.addbooks, name='addbooks'),
     path('bookinfo/<uuid:book_id>/', views.bookinfo, name='bookinfo'),
     path('requests/', views.requests, name='requests'),
+    path('remove_book/<uuid:book_id>/', views.remove_book, name='remove_book'),
+
+
     # path('add_to_wishlist/<uuid:book_id>/', views.add_to_wishlist, name='add_to_wishlist'),
     # path('book_detail/<uuid:book_id>/', views.book_detail, name='book_detail'),
     # path('add_review/<uuid:book_id>/', views.add_review, name='add_review'),

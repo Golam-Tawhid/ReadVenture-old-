@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Books, User, Receipt
 from django.contrib.auth import logout
+#from django.http import Http404
 
 def sign_in(request):
     if request.method == 'POST':
@@ -119,6 +120,13 @@ def profile(request):
 
 def mybooks(request):
     user_books = Books.objects.filter(owner=request.user)
+    #me 
+   
+    
+    for book in user_books:
+        print(f'Book ID: {book.book_id}, Title: {book.title}, Owner: {book.owner}')
+   
+
     return render(request, 'readventure/mybooks.html', {'user_books': user_books})
 
 def wishlist(request):
@@ -146,3 +154,30 @@ def requests(request):
 def custom_logout(request):
     logout(request)
     return redirect('sign_in')
+
+
+
+
+
+
+
+
+
+
+
+
+
+# views.py
+from django.http import Http404
+
+def remove_book(request, book_id):
+    try:
+        
+        book = get_object_or_404(Books, book_id=book_id, owner=request.user)
+        book.delete()
+    except Books.DoesNotExist:
+        # Handle the case where the book with the given ID doesn't exist
+        raise Http404("Book does not exist")
+    return redirect('mybooks')
+
+
