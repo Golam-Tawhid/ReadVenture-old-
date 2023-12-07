@@ -23,15 +23,12 @@ def sign_in(request):
             request.session['login_success'] = True
             return redirect('home')
         else:
-           # return render(request, 'readventure/sign_in.html', {'error_message': 'Invalid login credentials'})
            messages.error(request, 'Invalid login credentials')
         
     return render(request, 'readventure/sign_in.html')
 
 def home(request):
-    # Check if the user is logged in
     if request.session.get('login_success'):
-        # Check if it's a POST request (form submission)
         if request.method == 'POST':
             search_query = request.POST.get('search_query', '')
             search_type = request.POST.get('search_type', 'all')
@@ -48,8 +45,6 @@ def home(request):
             return render(request, 'readventure/home.html', {'books': books, 'search_query': search_query, 'search_type': search_type})
 
         return render(request, 'readventure/home.html')
-
-    # If not logged in, redirect to the sign-in page
     else:
         return redirect('sign_in')
     
@@ -60,7 +55,6 @@ def bookinfo(request, book_id):
 def add_to_wishlist(request, book_id):
     if request.method == 'POST':
         book = Books.objects.get(book_id=book_id)
-        # Assuming authenticated user
         User.objects.add_to_wishlist(request.user, book)
         return redirect('bookinfo', book_id=book_id)
     else:
@@ -72,11 +66,7 @@ def request_to_borrow(request, book_id):
     if request.method == 'POST':
         book = Books.objects.get(book_id=book_id)
         owner = book.owner
-
-        # Create a request entry for the owner
         Receipt.objects.create(book=book, borrower=request.user)  # Assuming authenticated user
-
-        # Redirect to a success page or wherever needed
         return redirect('bookinfo', book_id=book_id)
     
     else:
