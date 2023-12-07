@@ -8,7 +8,7 @@ class CustomUserAdmin(UserAdmin):
         (None, {'fields': ('student_id', 'email', 'password')}),
         ('Personal Info', {'fields': ('first_name', 'last_name', 'contact_no', 'profile_picture')}),
         ('Permissions', {'fields': ('is_staff', 'is_superuser', 'admin', 'regular')}),
-        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+        # ('Important dates', {'fields': ('last_login', 'date_joined')}),
         ('User Lists', {'fields': ('booklist', 'wishlist')}),
     )
     add_fieldsets = (
