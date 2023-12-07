@@ -7,6 +7,9 @@
     <title>MY Books</title>
     <link rel="stylesheet" href="{% static 'css/mybooks.css' %}">
     <link rel="icon" href="{% static 'icon/favicon.ico' %}">
+    
+    
+    
 </head>
 <body>
 
@@ -45,13 +48,28 @@
                             <p>Language: {{ book.language }}</p>
                             <p>ISBN: {{ book.isbn }}</p>
                             <button type="submit">Remove Book</button>
+
                         </form>
-                    </div>
                
+                        <form id="availabilityForm" method="post" action="{% url 'toggle_availability' book.book_id %}">
+                            {% csrf_token %}
+                            <button type="submit" id="availabilityButton">
+                                {% if book.availability %}
+                                    Mark as Not Available
+                                {% else %}
+                                    Mark as Available
+                                {% endif %}
+                            </button>
+                        </form>
+                        
+                        
+                        
+                    </div>
+                
             {% endfor %}
         </div>
     </section>
-
+                    
 
 
 </body>

@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from .forms import SignUpForm,Addbooksform, UpdateUserForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import Books, User, Receipt
+from .models import Books, User, Receipt,Availability
 from django.contrib.auth import logout
 from django.http import Http404
 from django.urls import reverse_lazy
@@ -180,6 +180,28 @@ def remove_from_wishlist(request, book_id):
     request.user.wishlist.remove(book)
 
     return redirect('wishlist')  
+
+
+
+
+
+
+# Add this function
+def toggle_availability(request, book_id):
+    book = get_object_or_404(Books, book_id=book_id, owner=request.user)
+
+    # Retrieve or create the Availability record for the book
+    availability, created = Availability.objects.get_or_create(book_id=book_id)
+
+    # Toggle the availability status
+    availability.status = 'Unavailable' if availability.status == 'Available' else 'Available'
+    availability.save()
+
+    return redirect('mybooks')
+
+
+
+
 
 
 

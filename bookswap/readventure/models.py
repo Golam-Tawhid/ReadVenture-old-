@@ -61,6 +61,7 @@ class Books(models.Model):
     ratings = models.ManyToManyField('Receipt', related_name='books_ratings')
     reviews = models.ManyToManyField('Receipt', related_name='books_reviews')
     receipt_numbers = models.ManyToManyField('Receipt', related_name='books_receipt_numbers')
+    
 
     def request_to_borrow(self, borrower):
         Receipt.objects.create(book=self, borrower=borrower)
@@ -81,8 +82,11 @@ class Receipt(models.Model):
         return str(self.receipt_no)
 
 class Availability(models.Model):
-    book = models.OneToOneField(Books, on_delete=models.CASCADE, primary_key=True)
+    book = models.OneToOneField(Books, on_delete=models.CASCADE, primary_key=True, related_name='availability_relation')
     status = models.CharField(max_length=30, default='Available')
+
+
+
 
     def __str__(self):
         return f'{self.book.title} - {self.status}'
