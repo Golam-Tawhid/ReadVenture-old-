@@ -5,9 +5,11 @@ from django.utils.translation import gettext as _
 
 class CustomUserAdmin(UserAdmin):
     fieldsets = (
-        (None, {'fields': ('student_id', 'password')}),
-        ('Personal Info', {'fields': ('first_name', 'last_name', 'email', 'contact_no', 'profile_picture')}),
-        ('Permissions', {'fields': ('is_staff', 'admin', 'regular', 'groups', 'user_permissions')}),
+        (None, {'fields': ('student_id', 'email', 'password')}),
+        ('Personal Info', {'fields': ('first_name', 'last_name', 'contact_no', 'profile_picture')}),
+        ('Permissions', {'fields': ('is_staff', 'is_superuser', 'admin', 'regular')}),
+        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+        ('User Lists', {'fields': ('booklist', 'wishlist')}),
     )
     add_fieldsets = (
         (None, {
@@ -31,13 +33,3 @@ class CustomUserAdmin(UserAdmin):
     make_admin.short_description = "Make selected users admin"
 
 admin.site.register(User, CustomUserAdmin)
-
-
-    # fieldsets = (
-    #     (None, {'fields': ('student_id', 'email', 'password')}),
-    #     ('Personal Info', {'fields': ('first_name', 'last_name', 'contact_no', 'profile_picture')}),
-    #     ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'admin', 'regular')}),
-    #     ('Important dates', {'fields': ('last_login', 'date_joined')}),
-    #     ('User Lists', {'fields': ('booklist', 'wishlist')}),
-    # )
-
