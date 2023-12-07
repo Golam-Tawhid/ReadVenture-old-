@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 def sign_in(request):
     if request.method == 'POST':
@@ -20,7 +21,8 @@ def sign_in(request):
             request.session['login_success'] = True
             return redirect('home')
         else:
-            return render(request, 'readventure/sign_in.html', {'error_message': 'Invalid login credentials'})
+           # return render(request, 'readventure/sign_in.html', {'error_message': 'Invalid login credentials'})
+           messages.error(request, 'Invalid login credentials')
         
     return render(request, 'readventure/sign_in.html')
 
