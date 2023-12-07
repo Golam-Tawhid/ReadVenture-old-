@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.http import JsonResponse
 
 def sign_in(request):
     if request.method == 'POST':
@@ -181,12 +182,6 @@ def remove_from_wishlist(request, book_id):
 
     return redirect('wishlist')  
 
-
-
-
-
-
-# Add this function
 def toggle_availability(request, book_id):
     book = get_object_or_404(Books, book_id=book_id, owner=request.user)
 
@@ -197,14 +192,8 @@ def toggle_availability(request, book_id):
     availability.status = 'Unavailable' if availability.status == 'Available' else 'Available'
     availability.save()
 
-    return redirect('mybooks')
-
-
-
-
-
-
-
+    # Return the updated availability status in the JsonResponse
+    return JsonResponse({'availability': availability.status})
 
 
 def update_user(request):
