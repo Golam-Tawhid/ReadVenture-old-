@@ -22,14 +22,6 @@ urlpatterns = [
     path('remove_book/<uuid:book_id>/', views.remove_book, name='remove_book'),
     path('remove_from_wishlist/<uuid:book_id>/', views.remove_from_wishlist, name='remove_from_wishlist'),
     path('toggle_availablility/<uuid:book_id>/', views.toggle_availability, name='toggle_availability'),
-    
-    
-
-
-
-
-
-
     # path('add_to_wishlist/<uuid:book_id>/', views.add_to_wishlist, name='add_to_wishlist'),
     # path('book_detail/<uuid:book_id>/', views.book_detail, name='book_detail'),
     # path('add_review/<uuid:book_id>/', views.add_review, name='add_review'),
