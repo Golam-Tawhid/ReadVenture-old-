@@ -52,19 +52,19 @@ class Books(models.Model):
     isbn = models.CharField(max_length=20, default='N/A')
     genre = models.CharField(max_length=30, default='N/A')
     category = models.CharField(max_length=30, default='N/A')
-    cover_page = models.ImageField(upload_to='images/', default='images/default.jpg')
+    cover_photo = models.ImageField(upload_to='images/', default='images/default.jpg')
     language = models.CharField(max_length=30, default='N/A')
     condition = models.CharField(max_length=30, default='N/A')
     status = models.CharField(max_length=30, default='Available')
 
     
-    ratings = models.ManyToManyField('Receipt', related_name='books_ratings')
-    reviews = models.ManyToManyField('Receipt', related_name='books_reviews')
-    exchange_ids = models.ManyToManyField('Receipt', related_name='books_receipt_numbers')
+    ratings = models.ManyToManyField('Exchange_info', related_name='books_ratings')
+    reviews = models.ManyToManyField('Exchange_info', related_name='books_reviews')
+    exchange_ids = models.ManyToManyField('Exchange_info', related_name='books_receipt_numbers')
     
 
     # def request_to_borrow(self, borrower):
-    #     Receipt.objects.create(book=self, borrower=borrower)
+    #     Exchange_info.objects.create(book=self, borrower=borrower)
 
     def __str__(self):
         return self.title
@@ -73,7 +73,7 @@ class Exchange_info(models.Model):
     exchange_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     book = models.ForeignKey(Books, on_delete=models.CASCADE, to_field='book_id')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
-    borrower = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
+    borrower = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id', related_name='borrower')
     due_date = models.DateField()
     return_date = models.DateField(null=True, blank=True)
     status = models.CharField(max_length=30, default='Pending')

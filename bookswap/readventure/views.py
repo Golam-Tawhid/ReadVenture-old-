@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from .forms import SignUpForm,Addbooksform, UpdateUserForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .models import Books, User, Receipt,Availability
+from .models import Books, User
 from django.contrib.auth import logout
 from django.http import Http404
 from django.urls import reverse_lazy
