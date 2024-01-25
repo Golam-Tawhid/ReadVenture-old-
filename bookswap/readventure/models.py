@@ -57,12 +57,10 @@ class Books(models.Model):
     condition = models.CharField(max_length=30, default='N/A')
     status = models.CharField(max_length=30, default='Available')
 
-    
     ratings = models.ManyToManyField('Exchange_info', related_name='books_ratings')
     reviews = models.ManyToManyField('Exchange_info', related_name='books_reviews')
     exchange_ids = models.ManyToManyField('Exchange_info', related_name='books_receipt_numbers')
     
-
     # def request_to_borrow(self, borrower):
     #     Exchange_info.objects.create(book=self, borrower=borrower)
 
@@ -77,8 +75,6 @@ class Exchange_info(models.Model):
     due_date = models.DateField()
     return_date = models.DateField(null=True, blank=True)
     status = models.CharField(max_length=30, default='Pending')
-
-
     
 # resizing images
 # def save(self, *args, **kwargs):
