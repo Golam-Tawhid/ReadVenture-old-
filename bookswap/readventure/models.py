@@ -27,7 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=30, default='N/A')
     last_name = models.CharField(max_length=30, default='N/A')
     email = models.EmailField(unique=True)
-    contact_no = models.CharField(max_length=15, default='N/A')
+    contact_no = models.CharField(max_length=15, unique=True,  default='N/A')
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     wishlist= models.ManyToManyField('Books', related_name='user_wishlist')
 
