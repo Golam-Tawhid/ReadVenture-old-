@@ -92,14 +92,17 @@ def profile(request):
     return render(request, 'readventure/profile.html', context)
 
 def requests(request):
-    # Get the current user (book owner)
-    owner = request.user
+    incoming_requests = Exchange_info.objects.filter(owner=request.user, status='pending')
+    accepted_requests = Exchange_info.objects.filter(owner=request.user, status='accepted')
+    outgoing_requests = Exchange_info.objects.filter(borrower=request.user, status='pending')
 
-    # Retrieve all receipt entries related to the books owned by the current user
-    owned_books = Books.objects.filter(owner=owner)
-    incoming_requests = Exchange_info.objects.filter(book__in=owned_books)
+    context = {
+        'incoming_requests': incoming_requests,
+        'outgoing_requests': outgoing_requests,
+        'accepted_requests': accepted_requests,
+    }
 
-    return render(request, 'readventure/requests.html', {'incoming_requests': incoming_requests})
+    return render(request, 'readventure/requests.html', context)
 
 def remove_book(request, book_id):
     try:
@@ -107,12 +110,10 @@ def remove_book(request, book_id):
         book = get_object_or_404(Books, book_id=book_id, owner=request.user)
         book.delete()
     except Books.DoesNotExist:
-        # Handle the case where the book with the given ID doesn't exist
         raise Http404("Book does not exist")
     return redirect('mybooks')
 
 def remove_from_wishlist(request, book_id):
-    # Remove the book from the wishlist
     book = get_object_or_404(Books, book_id=book_id)
     request.user.wishlist.remove(book)
 
@@ -120,14 +121,30 @@ def remove_from_wishlist(request, book_id):
 
 def request_to_borrow(request, book_id):
     if request.method == 'POST':
-        book = Books.objects.get(book_id=book_id)
+        book = get_object_or_404(Books, book_id=book_id)
+        
+        # Assuming the owner is a field in the Books model
         owner = book.owner
-        Exchange_info.objects.create(book=book, borrower=request.user)  # Assuming authenticated user
-        return redirect('bookinfo', book_id=book_id)
+        
+        # Create Exchange_info instance with owner and borrower
+        Exchange_info.objects.create(book=book, owner=owner, borrower=request.user)  # Assuming authenticated user
+        return redirect('requests')
     
     else:
         print("Book cannot be added")
+    
     return render(request, 'readventure/home.html', {'book_id': book_id})
+
+# def request_to_borrow(request, book_id):
+#     if request.method == 'POST':
+#         book = Books.objects.get(book_id=book_id)
+#         owner = book.owner
+#         Exchange_info.objects.create(book=book, borrower=request.user)  # Assuming authenticated user
+#         return redirect('bookinfo', book_id=book_id)
+    
+#     else:
+#         print("Book cannot be added")
+#     return render(request, 'readventure/home.html', {'book_id': book_id})
 
 def sign_in(request):
     if request.method == 'POST':
@@ -195,3 +212,22 @@ def wishlist(request):
     }
     user_wishlist = request.user.wishlist.all()
     return render(request, 'readventure/wishlist.html', context)
+
+#----------------------------------------------------------------------------
+def ignore_request(request, exchange_id):
+    exchange_info = get_object_or_404(Exchange_info, exchange_id=exchange_id)
+    exchange_info.status = 'ignored'
+    exchange_info.save()
+    return redirect('requests')
+
+def accept_request(request, exchange_id):
+    exchange_info = get_object_or_404(Exchange_info, exchange_id=exchange_id)
+    exchange_info.status = 'accepted'
+    exchange_info.save()
+    return redirect('requests')
+
+def cancel_request(request, exchange_id):
+    exchange_request = get_object_or_404(Exchange_info, exchange_id=exchange_id)
+    # Perform logic for canceling the request (e.g., delete the request)
+    exchange_request.delete()
+    return redirect('requests')

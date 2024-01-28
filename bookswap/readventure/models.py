@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 import uuid
 from PIL import Image
 
@@ -60,21 +61,27 @@ class Books(models.Model):
     ratings = models.ManyToManyField('Exchange_info', related_name='books_ratings')
     reviews = models.ManyToManyField('Exchange_info', related_name='books_reviews')
     exchange_ids = models.ManyToManyField('Exchange_info', related_name='books_receipt_numbers')
-    
-    # def request_to_borrow(self, borrower):
-    #     Exchange_info.objects.create(book=self, borrower=borrower)
 
     def __str__(self):
         return self.title
-    
+
+def default_due_date():
+    return timezone.now() + timezone.timedelta(days=14)
+
 class Exchange_info(models.Model):
     exchange_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
-    book = models.ForeignKey(Books, on_delete=models.CASCADE, to_field='book_id')
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id')
-    borrower = models.ForeignKey(User, on_delete=models.CASCADE, to_field='student_id', related_name='borrower')
-    due_date = models.DateField()
+    book = models.ForeignKey(Books, on_delete=models.CASCADE, related_name='exchange_book')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='exchange_owner')
+    borrower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='exchange_borrower')
+    due_date = models.DateField(default=default_due_date)
     return_date = models.DateField(null=True, blank=True)
-    status = models.CharField(max_length=30, default='Pending')
+
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('ignored', 'Ignored'),
+    ]
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     
 # resizing images
 # def save(self, *args, **kwargs):

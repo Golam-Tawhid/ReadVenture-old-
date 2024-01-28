@@ -24,35 +24,57 @@
       <section id="home" >
         <section id="book-requests">
             <div class="request-block" style="margin-top: 0px;">
-
-
                     <h2>Incoming Requests</h2>
                     {% for receipt in incoming_requests %}
-                    <div class="request">
-                        <p>Book ID: <span class="book-id">{{ receipt.book.id }}</span></p>
-                        <p>Book Title: <span class="book-title">{{ receipt.book.title }}</span></p>
-                        <p>Borrower ID: <span class="owner-id">{{ receipt.borrower.id }}</span></p>
-                        <!-- Other details and buttons as needed -->
-                        <button class="ignore-btn">Ignore</button>
-                        <button class="accept-btn">Accept</button>
-                    </div>
+                        {% if receipt.status == 'pending' %}
+                            <div class="request">
+                                <p>Book ID: <span class="book-id">{{ receipt.book.book_id }}</span></p>
+                                <p>Book Title: <span class="book-title">{{ receipt.book.title }}</span></p>
+                                <p>Borrower ID: <span class="owner-id">{{ receipt.borrower.student_id }}</span></p>
+                                <!-- Other details and buttons as needed -->
+                                <form action="{% url 'ignore_request' receipt.exchange_id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="ignore-btn">Ignore</button>
+                                </form>
+                                <form action="{% url 'accept_request' receipt.exchange_id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="accept-btn">Accept</button>
+                                </form>
+                    
+                            </div>
+                         {% endif %}
+
                     {% endfor %}
                 </div>
-
-
-
             <!-- ... (other HTML code) ... -->
-
+            <div class="request-block">
+                <h2>Accepted Requests</h2>
+                {% for receipt in accepted_requests %}
+                    <div class="request">
+                        <!-- ... (other details) ... -->
+                        <p>Book ID: <span class="book-id">{{ receipt.book.book_id }}</span></p>
+                        <p>Book Title: <span class="book-title">{{ receipt.book.title }}</span></p>
+                        <p>Borrower ID: <span class="owner-id">{{ receipt.borrower.student_id }}</span></p>
+                    </div>
+                {% endfor %}
+            </div>
+            
             <div class="request-block">
                 <h2>Outgoing Requests</h2>
                 {% for request in outgoing_requests %}
+                    {% if request.borrower == user %}
                     <div class="request">
-                        <p>Book ID: <span class="book-id">{{ request.book.id }}</span></p>
+                        <p>Book ID: <span class="book-id">{{ request.book.book_id }}</span></p>
                         <p>Book Title: <span class="book-title">{{ request.book.title }}</span></p>
-                        <p>Owner ID: <span class="owner-id">{{ request.owner.id }}</span></p>
+                        <p>Owner ID: <span class="owner-id">{{ request.owner.student_id }}</span></p>
                         <!-- Other details and buttons as needed -->
-                        <button class="cancel-btn">Cancel</button>
+                        <form action="{% url 'cancel_request' request.exchange_id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="cancel-btn">Cancel</button>
+                        </form>
+            
                     </div>
+                    {% endif %}
                 {% endfor %}
             </div>
 

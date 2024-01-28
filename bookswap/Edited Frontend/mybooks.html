@@ -128,7 +128,44 @@ addBook("Book 4", "Author 4", "Mystery", "Thriller", "German", "6543210987", "bo
     </section>
 
     
-
+    <form class="availabilityForm" method="post" action="{% url 'toggle_availability' book.book_id %}">
+        {% csrf_token %}
+        <button type="submit" class="availabilityButton">
+            {% if book.availability == 'Available' %}
+                Not Available
+            {% else %}
+                Available
+            {% endif %}
+        </button>
+    </form>
+    
+    <script>
+        $(document).ready(function() {
+            $('.availabilityForm').submit(function(e) {
+                e.preventDefault();
+                
+                // Reference the specific form and button within the current context
+                var form = $(this);
+                var button = form.find('.availabilityButton');
+                
+                // Perform the form submission using AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        // Update the button text based on the new availability status
+                        button.text(response.availability === 'Available' ? 'Not Available' : 'Available');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+    
 </body>
 
 
