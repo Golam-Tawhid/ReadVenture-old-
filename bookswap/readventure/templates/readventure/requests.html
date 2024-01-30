@@ -1,26 +1,20 @@
+{% extends 'readventure/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Requests</title>
+
+{% block title %}
+    Book Requests
+{% endblock %}
+
+{% block head_links %}
     <link rel="stylesheet" href="{% static 'css/request.css' %}">
-</head>
-<body style="background-image: url(/static/images/img22.jpg);">
+{% endblock %}
+
+{% block background_image %}
+    /static/images/{{ background_image }}
+{% endblock %}
+
+{% block content %}
     
-    <header>
-        <nav><a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a></nav>
-        <nav>
-            <a href="{% url 'home' %}">HOME</a>
-            <a href="{% url 'mybooks' %}">MY BOOKS</a>
-            <a href="{% url 'wishlist' %}">WISHLIST</a>
-            <a href="{% url 'borrowed' %}">BORROWED</a>
-            <a href="{% url 'requests' %}" style="color: rgb(217, 196, 255);">REQUESTS</a>
-            <a href="{% url 'profile' %}">PROFILE</a>
-            <a href="{% url 'logout' %}">LOGOUT</a>
-        </nav>
-    </header>
       <section id="home" >
         <section id="book-requests">
             <div class="request-block" style="margin-top: 0px;">
@@ -77,14 +71,8 @@
                     {% endif %}
                 {% endfor %}
             </div>
-
-<!-- ... (other HTML code) ... -->
-
-
-            <!-- ... (other HTML code) ... -->
-
         </section>
         
       </section>
-</body>
-</html>
+
+{% endblock %}

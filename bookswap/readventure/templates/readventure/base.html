@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'icon/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/request.css' %}">
+    {% block head_links %}{% endblock %}
+</head>
+
+<body style="background-image: url('/static/images/{{ background_image }}');">
+    <header>
+        <nav><a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a></nav>
+        <nav>
+            <a href="{% url 'home' %}">HOME</a>
+            <a href="{% url 'mybooks' %}">MY BOOKS</a>
+            <a href="{% url 'wishlist' %}">WISHLIST</a>
+            <a href="{% url 'borrowed' %}">BORROWED</a>
+            <a href="{% url 'requests' %}" style="color: rgb(217, 196, 255);">REQUESTS</a>
+            <a href="{% url 'profile' %}">PROFILE</a>
+            <a href="{% url 'logout' %}">LOGOUT</a>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 ReadVenture. All rights reserved.</p>
+    </footer>
+</body>
+</html>

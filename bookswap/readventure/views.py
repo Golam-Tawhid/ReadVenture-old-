@@ -30,7 +30,13 @@ def addbooks(request):
     else:
         form = Addbooksform()
     
-    return render(request, 'readventure/addbooks.html', {'form': form})
+    background_image = 'peakpx.jpg'
+    context = {
+        'form': form,
+        'background_image': background_image,
+    }
+    
+    return render(request, 'readventure/addbooks.html', context)
 
 def add_to_wishlist(request, book_id):
     if request.method == 'POST':
@@ -44,7 +50,12 @@ def add_to_wishlist(request, book_id):
 
 def bookinfo(request, book_id):
     book = get_object_or_404(Books, book_id=book_id)
-    return render(request, 'readventure/bookinfo.html', {'book': book})
+    background_image = 'img3.jpeg'
+    context = {
+        'book' : book,
+        'background_image' : background_image,
+    }
+    return render(request, 'readventure/bookinfo.html', context)
 
 def borrowed(request):
     context = {
@@ -92,6 +103,7 @@ def profile(request):
     return render(request, 'readventure/profile.html', context)
 
 def requests(request):
+    background_image = 'img22.jpg'
     incoming_requests = Exchange_info.objects.filter(owner=request.user, status='pending')
     accepted_requests = Exchange_info.objects.filter(owner=request.user, status='accepted')
     outgoing_requests = Exchange_info.objects.filter(borrower=request.user, status='pending')
@@ -100,6 +112,7 @@ def requests(request):
         'incoming_requests': incoming_requests,
         'outgoing_requests': outgoing_requests,
         'accepted_requests': accepted_requests,
+        'background_image': background_image,
     }
 
     return render(request, 'readventure/requests.html', context)

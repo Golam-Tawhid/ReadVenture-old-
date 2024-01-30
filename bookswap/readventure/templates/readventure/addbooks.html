@@ -1,15 +1,12 @@
+{% extends 'readventure/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Add Books</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.min.css' %}">
-    <link rel="icon" href="{% static 'icon/favicon.ico' %}">
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 
+{% block title %}
+    Add Books
+{% endblock %}
+
+{% block head_links %}
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
     <style>
         body {
             margin: 0;
@@ -83,9 +80,13 @@
             background-color: #45a049;
         }
     </style>
-</head>
+{% endblock %}
 
-<body>
+{% block background_image %}
+    /static/images/{{ background_image }}
+{% endblock %}
+
+{% block content %}
     <div class="wrapper">
         <div class="inner">
             <div class="image-holder">
@@ -129,5 +130,4 @@
             </form>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}
