@@ -1,0 +1,128 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 60px 0 0; /* Adjust the top padding (60px in this case) */
+  background-color: #f4f4f4;
+  overflow-x: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+header {
+  position: fixed; /* Make the header fixed */
+  top: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav {
+  background-color: #333;
+  overflow: hidden;
+  text-align: right;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 14px 16px;
+  display: inline-block;
+  margin: 0 10px;
+  transition: color 0.3s;
+  font-size: 18px;
+}
+
+nav a:hover {
+  color: #4CAF50;
+}
+
+section {
+  
+  padding: 80px 20px; /* Adjusted padding to account for fixed header */
+  text-align: center;
+  color: #fff; /* Set text color to make it readable on the background image */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* section#home {
+  
+  
+} */
+/* ................................................................ */
+
+#book-requests {
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.request-block {
+  background-color: #ffffff63; /* Adjust background color */
+  width: 1000px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex: 1; /* Use flex property to make blocks flexible and distribute space equally */
+  margin: 10px 10px; /* Add margin for spacing between blocks */
+  color: rgb(15, 15, 22);
+}
+
+.request {
+  display: inline-block;
+  background-color: #ffffff81;
+  padding: 10px;
+  height: 180px;
+  width: 180px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  color: rgb(7, 6, 24);
+}
+
+button {
+  padding: 8px 16px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.ignore-btn {
+  background-color: #340ebb; /* Adjust button background color */
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+}
+
+.ignore-btn:hover {
+  background-color: #5035b4;
+  
+}
+.accept-btn {
+  background-color: #01835c;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+}
+.accept-btn:hover {
+  background-color: #19ac76;
+}
+
+.cancel-btn {
+  background-color: #9b0000;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+}
+.cancel-btn:hover {
+  background-color: #c71313;
+}
+

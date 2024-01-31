@@ -58,8 +58,10 @@ def bookinfo(request, book_id):
     return render(request, 'readventure/bookinfo.html', context)
 
 def borrowed(request):
+    background_image = 'o.jpg'
     context = {
         'books': Books.objects.all(),
+        'background_image' : background_image,
     }
     return render(request, 'readventure/borrowed.html', context)
 
@@ -68,6 +70,7 @@ def custom_logout(request):
     return redirect('sign_in')
 
 def home(request):
+    background_image = 'home.jpg'
     if request.session.get('login_success'):
         if request.method == 'POST':
             search_query = request.POST.get('search_query', '')
@@ -84,22 +87,29 @@ def home(request):
 
             return render(request, 'readventure/home.html', {'books': books, 'search_query': search_query, 'search_type': search_type})
 
-        return render(request, 'readventure/home.html')
+        return render(request, 'readventure/home.html', {'background_image' : background_image})
     else:
         return redirect('sign_in')
 
 def mybooks(request):
+    background_image = 'j.jpg'
     user_books = Books.objects.filter(owner=request.user)
     for book in user_books:
         print(f'Book ID: {book.book_id}, Title: {book.title}, Owner: {book.owner}')
-   
-
-    return render(request, 'readventure/mybooks.html', {'user_books': user_books})
+    context = {
+       'background_image' : background_image,
+       'user_book' : user_books,
+   }
+    return render(request, 'readventure/mybooks.html', context)
 
 @login_required
 def profile(request):
     user = request.user
-    context = {'user': user}
+    background_image = 'm.jpg'
+    context = {
+        'user': user,
+        'background_image' : background_image,
+        }
     return render(request, 'readventure/profile.html', context)
 
 def requests(request):
@@ -220,8 +230,10 @@ def update_user(request):
     return render(request, 'readventure/updateprofile.html', {'form': form})
 
 def wishlist(request):
+    background_image = 'booklist.jpg'
     context = {
         'books': Books.objects.all(),
+        'background_image' : background_image,
     }
     user_wishlist = request.user.wishlist.all()
     return render(request, 'readventure/wishlist.html', context)

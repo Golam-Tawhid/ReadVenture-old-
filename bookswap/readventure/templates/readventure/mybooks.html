@@ -1,40 +1,27 @@
+{% extends 'readventure/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MY Books</title>
+
+{% block title %}
+    My Books
+{% endblock %}
+
+{% block head_links %}
     <link rel="stylesheet" href="{% static 'css/mybooks.css' %}">
-    <link rel="icon" href="{% static 'icon/favicon.ico' %}">
-    
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+{% endblock %}
 
-    
-</head>
-<body>
+{% block background_image %}
+    /static/images/{{ background_image }}
+{% endblock %}
 
-    <header>
-        <nav><a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a></nav>
-        <nav>
-            <a href="{% url 'home' %}">HOME</a>
-            <a href="{% url 'mybooks' %}" style="color: rgb(217, 196, 255);">MY BOOKS</a>
-            <a href="{% url 'wishlist' %}">WISHLIST</a>
-            <a href="{% url 'borrowed' %}">BORROWED</a>
-            <a href="{% url 'requests' %}">REQUESTS</a>
-            <a href="{% url 'profile' %}">PROFILE</a>
-            <a href="{% url 'logout' %}">LOGOUT</a>
-        </nav>
-    </header>
-    <section class="lower" style="background-image: url(/static/images/j.jpg);">
+{% block content %}
+    <section class="lower">
         <div>
             <a href="{% url 'addbooks' %}">
                 <button>Add Books</button>
             </a>
             
-        </div>
-
-        
+        </div>        
         <div id="bookContainer">
             {% for book in user_books %}
                 
@@ -50,17 +37,10 @@
                             <p>ISBN: {{ book.isbn }}</p>
                             <button type="submit">Remove Book</button>
 
-                        </form>
-               
-
-                        
+                        </form>                        
                     </div>
                 
             {% endfor %}
         </div>
     </section>
-                    
-
-
-</body>
-</html>
+{% endblock %}

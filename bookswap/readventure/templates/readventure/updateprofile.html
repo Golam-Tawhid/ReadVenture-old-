@@ -1,28 +1,19 @@
+{% extends 'readventure/base.html' %}
 {% load static %}
-{% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPDATE PROFILE</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/updateprofile.css' %}">
-    <link rel="icon" href="{% static 'icon/favicon.ico' %}">
-</head>
-<body>
-    <header>
-        <nav><a href="{% url 'home' %}" style="font-size: 32px;">ReadVenture</a></nav>
-        <nav>
-            <a href="{% url 'home' %}">HOME</a>
-            <a href="{% url 'mybooks' %}" style="color: rgb(217, 196, 255);">MY BOOKS</a>
-            <a href="{% url 'wishlist' %}">WISHLIST</a>
-            <a href="{% url 'borrowed' %}">BORROWED</a>
-            <a href="{% url 'requests' %}">REQUESTS</a>
-            <a href="{% url 'profile' %}">PROFILE</a>
-            <a href="{% url 'logout' %}">LOGOUT</a>
-        </nav>
-    </header>
 
+{% block title %}
+    Update Profile Info
+{% endblock %}
+
+{% block head_links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/updateprofile.css' %}">
+{% endblock %}
+
+{% block background_image %}
+    /static/images/{{ background_image }}
+{% endblock %}
+
+{% block content %}
     <div class="container my-5 fixed-background" style="background-image: url(/static/images/m.jpg);">
         <div class="row">
             <div class="col-md-6 offset-md-3">
@@ -90,7 +81,4 @@
             </div>
         </div>
     </div>
-{% endblock content %}
-    
-</body>
-</html>
+{% endblock  %}
