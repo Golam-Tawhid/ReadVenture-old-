@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'bookswap.wsgi.app'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bleh',
-        'USER': 'Pikachu',
-        'PASSWORD': 'pikapikapikachu',
+         'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ReadVenture',
+        'USER': 'newuser',
+        'PASSWORD': 'ReadVenture@1234',
         'HOST': 'localhost',
         'PORT': '3306',
     }

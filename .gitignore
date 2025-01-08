@@ -1,1 +1,6 @@
 bookswap/media
+venv
+bookswap/bookswap/__pycache__
+bookswap/readventure/__pycache__
+bookswap/readventure/migrations/__pycache__
+bookswap/readventure/templatetags/__pycache__
